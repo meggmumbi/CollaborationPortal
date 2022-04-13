@@ -53,7 +53,7 @@ namespace HRPortal
                                     if (new Config().IsAllowedExtension(extension))
                                     {
 
-                                        String ApplicationNo = Request.QueryString["ApplicationNo"];
+                                        String ApplicationNo = accreditationnumber.Text.Trim();
                                         ApplicationNo = ApplicationNo.Replace('/', '_');
                                         ApplicationNo = ApplicationNo.Replace(':', '_');
                                         String documentDirectory = filesFolder + ApplicationNo + "/";
@@ -87,9 +87,10 @@ namespace HRPortal
                                                 paymentdocument.SaveAs(filename);
                                                 if (File.Exists(filename))
                                                 {
+                                                    string tModesOfPayment = ModesOfPayment.SelectedValue;
                                                     string paymentreference = paymentsref.Text.Trim();
-                                                    Config.navExtender.AddLinkToRecord("License_Application_Header", ApplicationNo, filename, "");
-                                                    var status = Config.ObjNav.FnConfirmPayment(ApplicationNo, paymentreference);
+                                                    Config.navExtender.AddLinkToRecord("License_Application Card", ApplicationNo, filename, "");
+                                                    var status = Config.ObjNav.FnConfirmPayment(ApplicationNo, paymentreference, tModesOfPayment,0,"");
                                                     String[] info = status.Split('*');
                                                     if (info[0] == "success")
                                                     {

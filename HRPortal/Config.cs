@@ -20,11 +20,11 @@ namespace HRPortal
             };
             return nav;
         }
-        public static LicencingPortal.LicencingPortal ObjNav
+        public static CollaborationPortal.CollaborationPortal ObjNav
         {
             get
             {
-                var ws = new LicencingPortal.LicencingPortal();
+                var ws = new CollaborationPortal.CollaborationPortal();
 
                 try
                 {

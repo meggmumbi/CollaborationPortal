@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,6 +65,11 @@
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.4\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -108,6 +114,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppealApplication.aspx" />
     <Content Include="ApplicationAppeal.aspx" />
     <Content Include="ApplicationFinalReport.aspx" />
     <Content Include="ApprovedApplications.aspx" />
@@ -6230,6 +6237,7 @@
     <Content Include="bower_components\select2\vendor\jquery-2.1.0.js" />
     <Content Include="Certificate.aspx" />
     <Content Include="ChangePassword.aspx" />
+    <Content Include="ClosedApplications.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="css\base-admin-responsive.css" />
     <Content Include="css\bootstrap-responsive.min.css" />
@@ -6397,10 +6405,12 @@
     <Content Include="Home.aspx" />
     <Content Include="Home_Guidelines.aspx" />
     <Content Include="Home_Payments.aspx" />
+    <Content Include="ICTHelpDesk.aspx" />
     <Content Include="images\cue-header.jpg" />
     <Content Include="images\cueLogo.png" />
     <Content Include="images\hr-img.png" />
     <Content Include="images\imagesrm.png" />
+    <Content Include="images\loader.gif" />
     <Content Include="images\logo.png" />
     <Content Include="img\body-bg.png" />
     <Content Include="img\glyphicons-halflings-white.html" />
@@ -6424,7 +6434,10 @@
     <Content Include="js\charts\pie.js" />
     <Content Include="js\CustomJs.js" />
     <Content Include="js\excanvas.min.js" />
+    <Content Include="js\exceluploader.js" />
+    <Content Include="js\excel_uploader.js" />
     <Content Include="js\faq.js" />
+    <Content Include="js\FileSaver.js" />
     <Content Include="js\full-calendar\fullcalendar.css" />
     <Content Include="js\full-calendar\fullcalendar.min.js" />
     <Content Include="js\guidely\guidely-number.png" />
@@ -6514,6 +6527,9 @@
     <Content Include="kuddos\js\owl.carousel.min.js" />
     <Content Include="kuddos\js\popper.min.js" />
     <Content Include="kuddos\js\scrollax.min.js" />
+    <Content Include="LicensePrintOut.aspx" />
+    <Content Include="LicenseRenewal.aspx" />
+    <Content Include="LicensingRenewReport.aspx" />
     <Content Include="LoginAssets\images\avatar.png" />
     <Content Include="LoginAssets\images\coatofarms.png" />
     <Content Include="LoginAssets\images\cue-header.jpg" />
@@ -6689,9 +6705,11 @@
     <Content Include="Login.aspx" />
     <Content Include="MeScripts\PCadditionalActivities.js" />
     <Content Include="MeScripts\StaffPerformanceContract.js" />
+    <Content Include="MyAppealApplications.aspx" />
     <Content Include="MyProfile.aspx" />
     <Content Include="NewApplication.aspx" />
     <Content Include="OpenApplications.aspx" />
+    <Content Include="OpenRenewalApplications.aspx" />
     <Content Include="packages.config" />
     <Content Include="Payments.aspx" />
     <Content Include="plugins\bootstrap-slider\bootstrap-slider.js" />
@@ -6954,6 +6972,7 @@
     <Content Include="kuddos\scss\bootstrap\_utilities.scss" />
     <Content Include="kuddos\scss\bootstrap\_variables.scss" />
     <Content Include="kuddos\scss\style.scss" />
+    <Content Include="ProformaInvoice.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="RequestAccountCreation.aspx" />
     <Content Include="ResetPassword.aspx" />
@@ -7501,6 +7520,8 @@
     </None>
     <Content Include="Site.Mobile.Master" />
     <None Include="Service References\Nav\service.edmx" />
+    <Content Include="StaffUpload.aspx" />
+    <Content Include="TerminatedApplications.aspx" />
     <Content Include="vendor\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="vendor\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
     <Content Include="vendor\bootstrap-datepicker\dist\css\bootstrap-datepicker.standalone.css" />
@@ -7860,8 +7881,8 @@
     <Content Include="vendor\select2\src\scss\_multiple.scss" />
     <Content Include="vendor\select2\src\scss\_single.scss" />
     <Content Include="vendor\toastr\toastr.js.map" />
-    <None Include="Web References\LicencingPortal\LicencingPortal.wsdl" />
-    <None Include="Web References\LicencingPortal\Reference.map">
+    <None Include="Web References\CollaborationPortal\CollaborationPortal.wsdl" />
+    <None Include="Web References\CollaborationPortal\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -8183,6 +8204,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppealApplication.aspx.cs">
+      <DependentUpon>AppealApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppealApplication.aspx.designer.cs">
+      <DependentUpon>AppealApplication.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationAppeal.aspx.cs">
       <DependentUpon>ApplicationAppeal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8205,6 +8233,7 @@
       <DependentUpon>ApprovedApplications.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AttachedDoc.cs" />
     <Compile Include="Certificate.aspx.cs">
       <DependentUpon>Certificate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8218,6 +8247,13 @@
     </Compile>
     <Compile Include="ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClosedApplications.aspx.cs">
+      <DependentUpon>ClosedApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClosedApplications.aspx.designer.cs">
+      <DependentUpon>ClosedApplications.aspx</DependentUpon>
     </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="ContactUs.aspx.cs">
@@ -8288,12 +8324,40 @@
     <Compile Include="Home_Payments.aspx.designer.cs">
       <DependentUpon>Home_Payments.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ICTHelpDesk.aspx.cs">
+      <DependentUpon>ICTHelpDesk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ICTHelpDesk.aspx.designer.cs">
+      <DependentUpon>ICTHelpDesk.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LicensePrintOut.aspx.cs">
+      <DependentUpon>LicensePrintOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LicensePrintOut.aspx.designer.cs">
+      <DependentUpon>LicensePrintOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LicenseRenewal.aspx.cs">
+      <DependentUpon>LicenseRenewal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LicenseRenewal.aspx.designer.cs">
+      <DependentUpon>LicenseRenewal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LicensingRenewReport.aspx.cs">
+      <DependentUpon>LicensingRenewReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LicensingRenewReport.aspx.designer.cs">
+      <DependentUpon>LicensingRenewReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -8310,6 +8374,13 @@
       <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\ApprovalEntries.cs" />
+    <Compile Include="MyAppealApplications.aspx.cs">
+      <DependentUpon>MyAppealApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAppealApplications.aspx.designer.cs">
+      <DependentUpon>MyAppealApplications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8324,6 +8395,7 @@
     <Compile Include="NewApplication.aspx.designer.cs">
       <DependentUpon>NewApplication.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NotAttachedDoc.cs" />
     <Compile Include="OpenApplications.aspx.cs">
       <DependentUpon>OpenApplications.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8331,12 +8403,27 @@
     <Compile Include="OpenApplications.aspx.designer.cs">
       <DependentUpon>OpenApplications.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OpenRenewalApplications.aspx.cs">
+      <DependentUpon>OpenRenewalApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OpenRenewalApplications.aspx.designer.cs">
+      <DependentUpon>OpenRenewalApplications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Payments.aspx.cs">
       <DependentUpon>Payments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Payments.aspx.designer.cs">
       <DependentUpon>Payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostCode.cs" />
+    <Compile Include="ProformaInvoice.aspx.cs">
+      <DependentUpon>ProformaInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProformaInvoice.aspx.designer.cs">
+      <DependentUpon>ProformaInvoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -8399,6 +8486,13 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="StaffUpload.aspx.cs">
+      <DependentUpon>StaffUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StaffUpload.aspx.designer.cs">
+      <DependentUpon>StaffUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StatusOfApplication.aspx.cs">
       <DependentUpon>StatusOfApplication.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8407,6 +8501,13 @@
       <DependentUpon>StatusOfApplication.aspx</DependentUpon>
     </Compile>
     <Compile Include="Targets.cs" />
+    <Compile Include="TerminatedApplications.aspx.cs">
+      <DependentUpon>TerminatedApplications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TerminatedApplications.aspx.designer.cs">
+      <DependentUpon>TerminatedApplications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8414,7 +8515,7 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Web References\LicencingPortal\Reference.cs">
+    <Compile Include="Web References\CollaborationPortal\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -8437,16 +8538,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/LicencingPortal">
+    <WebReferenceUrl Include="http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/CollaborationPortal">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\LicencingPortal\</RelPath>
-      <UpdateFromURL>http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/LicencingPortal</UpdateFromURL>
+      <RelPath>Web References\CollaborationPortal\</RelPath>
+      <UpdateFromURL>http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/CollaborationPortal</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>HRPortal_LicencingPortal_LicencingPortal</CachedSettingsPropName>
+      <CachedSettingsPropName>HRPortal_CollaborationPortal_CollaborationPortal</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/NavXtender">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -13,330 +13,337 @@
             </ol>
         </div>
     </div>
-    <section style="background: #efefe9;">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading"><strong> LICENSING OF STUDENT RECRUITMENT AGENCIES PORTAL</strong> </div>
-                <div class="board">
-                    <div class="board-inner">
-                        <ul class="nav nav-tabs" id="myTab">
-                            <li class="active">
-                                <a href="#home" data-toggle="tab" title="Step 1">
-                                    <span class="round-tabs one">
-                                        <i class="fa fa-home"></i>
-                                        <strong>Stage1:</strong>
-                                    </span>
-                                </a></li>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Application Status
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div1"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                            <th></th>
+                            <th></th>
+                           
 
-                            <li><a href="#profile" data-toggle="tab" title="Step 2">
-                                <span class="round-tabs two">
-                                    <i class="fa fa-chevron-right"></i>
-                                    <strong>Stage2:</strong>
-                                </span>
-                            </a>
-                            </li>
-                            <li><a href="#messages" data-toggle="tab" title="Step 3">
-                                <span class="round-tabs three">
-                                    <i class="fa fa-chevron-right"></i>
-                                    <strong>Stage3:</strong>
-                                </span></a>
-                            </li>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            var nav = new Config().ReturnNav();
+                            string institutionNo = Convert.ToString(Session["InstitutionNo"]);
+                            var data1 = nav.LicenceApplicationHeader.Where(x => x.Account_No == institutionNo && x.Applicant_Type == "Collaboration").ToList();
+                            int counter = 0;
+                            foreach (var item in data1)
+                            {
+                                counter++;
+                        %>
+                        <tr>
+                            <td><%=counter %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Applicant_Type %></td>
+                            <td><% =item.Institution_Name %></td>                          
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>
+                            <%if (item.Application_Status == "Closed" && item.Preliminary_Verdict == "Approved for Licensing")
+                                {
 
-                            <li><a href="#settings" data-toggle="tab" title="Step 4">
-                                <span class="round-tabs four">
-                                    <i class="fa fa-chevron-right"></i>
-                                    <strong>Stage4:</strong>
-                                </span>
-                            </a></li>
 
-                            <li><a href="#doner" data-toggle="tab" title="Step 5">
-                                <span class="round-tabs five">
-                                    <i class="fa fa-chevron-right"></i>
-                                    <strong>Stage5:</strong>
-                                </span></a>
-                            </li>
-                        </ul>
+                            %><td></td>
+                            <%}
+                            else
+                            { %>
+                            <td></td>
+                            <%} %>
+                            <td> <a href="ApplicationFinalReport.aspx?ApplicationNo=<%=item.Application_No%>" class="btn btn-success"><i class="fa fa-file-pdf-o"></i>Application Report</a></td>
 
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="home">
-                            <div class="container">
-                                <h2 style="color:blue">Awaiting Finance Processing</h2>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                        Application Process 20% Complete
-                                    </div>
-                                </div>
-                                <p>Actionable items/Areas of responsibility are:</p>
-                                <ul>
-                                    <li>Undergoing preliminary check by the Commission</li>
-                                    <li>Completeness check completed, awaiting payment by the University</li>
-                                    <li>Completeness check completed, awaiting re-submission by the University (after preliminary check report has been submitted to university)</li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"><strong>Awaiting Finance Processing</strong> </div>
-                                        <div class="panel-body">
-                                            <table class="table table-bordered table-striped table-hover" id="dataTables-example1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Accreditation No:</th>
-                                                        <th>Programme Name</th>
-                                                        <th>Campus</th>
-                                                        <th>Application Date</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile">
-                            <div>
-                                <div class="container">
-                                    <h2>Licencing of student recruitment agencies Progress</h2>
-                                    <p>Completeness Check</p>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            Accreditation Process 40% Complete
-                                        </div>
-                                    </div>
-                                    <p>Actionable items/Areas of responsibility are:</p>
-                                    <ul>
-                                        <li>Awaiting feedback from the Commission</li>
-                                        <li>Awaiting feedback from the University (after Peer Reviewers’ report submitted to university)</li>
-                                    </ul>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="panel panel-default">
-                                            <div id="feedback" runat="server"></div>
-                                            <div class="panel-heading"><strong>Completeness Check</strong> </div>
-                                            <div class="panel-body">
-                                                <div id="Div1" runat="server"></div>
-                                                <table class="table table-bordered table-striped table-hover" id="dataTables-example2">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Accreditation No:</th>
-                                                            <th>Programme Name</th>
-                                                            <th>Campus</th>
-                                                            <th>Application Date</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-    <%--                                                    <%
-                                                            var nav2 = Config.ReturnNav();
-                                                            var programs2 = nav2.ProgramAccreditation.Where(r => r.Institution_No == Convert.ToString(Session["UniversityCode"]) && r.Current_Version == true && r.Status == "Awaiting Peer Review");
-                                                            int programme22 = 0;
-                                                            foreach (var program2 in programs2)
-                                                            {
-                                                                programme22++;
-                                                        %>
-                                                        <tr>
-                                                            <td><%=programme22%></td>
-                                                            <td><%=program2.Accreditation_No %></td>
-                                                            <td><%=program2.Program_Name %></td>
-                                                            <td><%=program2.Campus_Name %></td>
-                                                            <td><%=program2.Date_Created %></td>
-                                                            <td><%=program2.Status %></td>
-                                                        </tr>
-                                                        <%
-                                                            }
-                                                        %>--%>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="messages">
-                            <div class="container">
-                                <h2>Licencing of student recruitment agencies Progress</h2>
-                                <p>Awaiting Site Visit</p>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        Accreditation Process 60% Complete
-                                    </div>
 
-                                </div>
-                                <p>Actionable items/Areas of responsibility are:</p>
-                                <ul>
-                                    <li>Awaiting feedback from the Commission</li>
-                                    <li>Awaiting feedback from the University (after Peer Reviewers’ report submitted to university)</li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-lg-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"><strong>Awaiting Site Visit</strong> </div>
-                                        <div class="panel-body">
-                                            <div id="Div2" runat="server"></div>
-                                            <table class="table table-bordered table-striped table-hover" id="dataTables-example">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Accreditation No:</th>
-                                                        <th>Programme Name</th>
-                                                        <th>Campus</th>
-                                                        <th>Application Date</th>
-                                                        <th>Status</th>
-                                                </thead>
-                                                <tbody>
- <%--                                                   <%
-                                                        var nav3 = Config.ReturnNav();
-                                                        var programs3 = nav3.ProgramAccreditation.Where(r => r.Institution_No == Convert.ToString(Session["UniversityCode"]) && r.Current_Version == true && r.Status == "Verification of Academic Resources");
-                                                        int programme33 = 0;
-                                                        foreach (var program3 in programs3)
-                                                        {
-                                                            programme33++;
-                                                    %>
-                                                    <tr>
-                                                        <td><%=programme33 %></td>
-                                                        <td><%=program3.Accreditation_No %></td>
-                                                        <td><%=program3.Program_Name %></td>
-                                                        <td><%=program3.Campus_Name %></td>
-                                                        <td><%=program3.Date_Created %></td>
-                                                        <td><%=program3.Status %></td>
-                                                    </tr>
-                                                    <%
-                                                        }
-                                                    %>--%>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="settings">
-                            <div>
-                                <div class="container">
-                                    <h2>Licensing of Student Recruitment Agencies</h2>
-                                    <p>Being Processed for Approval</p>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            Accreditation Process 80% Complete
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Being Processed for Approval</strong> </div>
-                                            <div class="panel-body">
-                                                <div id="Div3" runat="server"></div>
-                                                <table class="table table-bordered table-striped table-hover" id="dataTables-example4">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Accreditation No:</th>
-                                                            <th>Programme Name</th>
-                                                            <th>Campus</th>
-                                                            <th>Application Date</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-<%--                                                        <%
-                                                            var nav4 = Config.ReturnNav();
-                                                            var programs4 = nav.ProgramAccreditation.Where(r => r.Institution_No == Convert.ToString(Session["UniversityCode"]) && r.Current_Version == true && r.Status == "Awaiting Board Approval");
-                                                            int program44 = 0;
-                                                            foreach (var program4 in programs4)
-                                                            {
-                                                                program44++;
-                                                        %>
-                                                        <tr>
-                                                            <td><%=program44 %></td>
-                                                            <td><%=program4.Accreditation_No %></td>
-                                                            <td><%=program4.Program_Name %></td>
-                                                            <td><%=program4.Campus_Name %></td>
-                                                            <td><%=program4.Date_Created %></td>
-                                                            <td><%=program4.Status %></td>
-                                                        </tr>
-                                                        <%
-                                                            }
-                                                        %>--%>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="doner">
-                            <div>
-                                <div class="container">
-                                    <h2>Licensing of Student Recruitment Agencies</h2>
-                                    <p>Application for licencing is completed</p>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                            Accreditation Process 100% Complete
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading"><strong>Application for Programme Accreditation completed</strong> </div>
-                                            <div class="panel-body">
-                                                <div id="Div4" runat="server"></div>
-                                                <table class="table table-bordered table-striped table-hover" id="dataTables-example5">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Accreditation No:</th>
-                                                            <th>Programme Name</th>
-                                                            <th>Campus</th>
-                                                            <th>Application Date</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-     <%--                                                   <%
-                                                            var nav5 = Config.ReturnNav();
-                                                            var programs5 = nav.ProgramAccreditation.Where(r => r.Institution_No == Convert.ToString(Session["UniversityCode"]) && r.Current_Version == true && r.Status == "Completed");
-                                                            int programs55 = 0;
-                                                            foreach (var program5 in programs5)
-                                                            {
-                                                                programs55++;
-                                                        %>
-                                                        <tr>
-                                                            <td><%=programs55 %></td>
-                                                            <td><%=program5.Accreditation_No %></td>
-                                                            <td><%=program5.Program_Name %></td>
-                                                            <td><%=program5.Campus_Name %></td>
-                                                            <td><%=program5.Date_Created %></td>
-                                                            <td><%=program5.Status %></td>
-                                                        </tr>
-                                                        <%
-                                                            }
-                                                        %>--%>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
+ 
+   
+<%--        <div class="panel-heading">
+            Application Awaiting Completeness Check
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div2"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                           
+                           
+                            var data = nav.LicenceApplicationHeader.Where(x => x.Institution_No == institutionNo && x.Applicant_Type == "Collaboration" && x.Application_Status == "Awaiting Completeness Check").ToList();
+                            int counter1 = 0;
+                            foreach (var item in data)
+                            {
+                                counter1++;
+                        %>
+                        <tr>
+                            <td><%=counter1 %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Appeal_Status %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>
+                            
+
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+
+   
+        <div class="panel-heading">
+            Application Awaiting Verification Check
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div3"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            
+                            var data2 = nav.LicenceApplicationHeader.Where(x => x.Institution_No == institutionNo && x.Applicant_Type == "Collaboration" && x.Application_Status == "Awaiting Verification Check").ToList();
+                            int counter2 = 0;
+                            foreach (var item in data2)
+                            {
+                                counter2++;
+                        %>
+                        <tr>
+                            <td><%=counter2 %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Appeal_Status %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>                           
+
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   
+
+    
+        <div class="panel-heading">
+            Application Awaiting Site Visit
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div4"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            
+                            var data3 = nav.LicenceApplicationHeader.Where(x => x.Institution_No == institutionNo && x.Applicant_Type == "Collaboration" && x.Application_Status == "Awaiting Site Visit").ToList();
+                            int counter3 = 0;
+                            foreach (var item in data3)
+                            {
+                                counter3++;
+                        %>
+                        <tr>
+                            <td><%=counter3 %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Appeal_Status %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>                           
+
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   
+
+    
+    
+        <div class="panel-heading">
+           Application Awaiting Certification
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div5"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            
+                            var data4 = nav.LicenceApplicationHeader.Where(x => x.Institution_No == institutionNo && x.Applicant_Type == "Collaboration" && x.Application_Status == "Awaiting Certification").ToList();
+                            int counter4 = 0;
+                            foreach (var item in data4)
+                            {
+                                counter4++;
+                        %>
+                        <tr>
+                            <td><%=counter4 %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Appeal_Status %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>                           
+
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   
+        
+    
+        <div class="panel-heading">
+          Approved For Licensing
+        </div>
+        <div class="panel-body">
+            <div runat="server" id="Div6"></div>
+            <div class="table-responsive">
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application Status</th>
+                            <th>Applicant Type</th>
+                            <th>Institution Name</th>
+                            <th>Primary Academic Focus</th>
+                            <th>Principal Research Focus</th>
+                            <th>Emai Address</th>
+                            <th>City</th>
+                            <th>License</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            
+                            var data5 = nav.LicenceApplicationHeader.Where(x => x.Institution_No == institutionNo && x.Applicant_Type == "Collaboration" && x.Application_Status == "Closed" && x.Preliminary_Verdict=="Approved for Licensing").ToList();
+                            int counter5 = 0;
+                            foreach (var item in data5)
+                            {
+                                counter5++;
+                        %>
+                        <tr>
+                            <td><%=counter5 %></td>
+                            <td><% =item.Application_Status%></td>
+                            <td><% =item.Appeal_Status %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Institution_Name %></td>
+                            <td><% =item.Local_Academic_Focus %></td>
+                            <td><% =item.Local_Research_Focus %></td>
+                            <td><% = item.Email_Address%></td>
+                            <td><% =item.City %></td>  
+                            <td><a href="NewApplication.aspx?ApplicationNo=<%=item.Application_No%>" class="btn btn-success"><i class="fa fa-edit"></i>View License</a> </td>
+                           
+                            <%
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+ --%>
+
+
+
+    
 </asp:Content>

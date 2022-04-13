@@ -28,7 +28,7 @@ namespace HRPortal
                     Session["name"] = user.Full_Name;
                     Session["email"] = user.Authentication_Email;
                     Session["phoneNo"] = user.Mobile_Phone_No;
-                    Session["password"] = user.Password_Value;                 
+                    Session["passwordValue"] = user.Password_Value;                 
                     Session["InstitutionNo"] = user.Record_ID;
                     if (user.Change_Password == false)
                     {

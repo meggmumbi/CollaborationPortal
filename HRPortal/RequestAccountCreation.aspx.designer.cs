@@ -31,6 +31,15 @@ namespace HRPortal {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl feedback;
         
         /// <summary>
+        /// acccountfeedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl acccountfeedback;
+        
+        /// <summary>
         /// agencyName control.
         /// </summary>
         /// <remarks>
@@ -40,22 +49,67 @@ namespace HRPortal {
         protected global::System.Web.UI.WebControls.TextBox agencyName;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// applicantType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList applicantType;
         
         /// <summary>
-        /// LocalAddress control.
+        /// RequiredFieldValidator26 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LocalAddress;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator26;
+        
+        /// <summary>
+        /// AppCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AppCountry;
+        
+        /// <summary>
+        /// foreignCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList foreignCountry;
+        
+        /// <summary>
+        /// local control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl local;
+        
+        /// <summary>
+        /// postalAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList postalAddress;
+        
+        /// <summary>
+        /// city control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox city;
         
         /// <summary>
         /// residentialAddress control.
@@ -67,13 +121,13 @@ namespace HRPortal {
         protected global::System.Web.UI.WebControls.TextBox residentialAddress;
         
         /// <summary>
-        /// postalAddress control.
+        /// postaLAddressPoBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList postalAddress;
+        protected global::System.Web.UI.WebControls.TextBox postaLAddressPoBox;
         
         /// <summary>
         /// telephoneNo control.
@@ -94,15 +148,6 @@ namespace HRPortal {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// whatsAppNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox whatsAppNo;
-        
-        /// <summary>
         /// alternativePhoneNumber control.
         /// </summary>
         /// <remarks>
@@ -110,6 +155,15 @@ namespace HRPortal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox alternativePhoneNumber;
+        
+        /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
         /// emailAddress control.
@@ -121,6 +175,15 @@ namespace HRPortal {
         protected global::System.Web.UI.WebControls.TextBox emailAddress;
         
         /// <summary>
+        /// regexEmailValid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexEmailValid;
+        
+        /// <summary>
         /// website control.
         /// </summary>
         /// <remarks>
@@ -130,21 +193,48 @@ namespace HRPortal {
         protected global::System.Web.UI.WebControls.TextBox website;
         
         /// <summary>
-        /// certificateNumber control.
+        /// contactName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox certificateNumber;
+        protected global::System.Web.UI.WebControls.TextBox contactName;
         
         /// <summary>
-        /// btn_accountcreation control.
+        /// contactPhoneNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_accountcreation;
+        protected global::System.Web.UI.WebControls.TextBox contactPhoneNo;
+        
+        /// <summary>
+        /// RegularExpressionValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        
+        /// <summary>
+        /// contactEmailAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox contactEmailAdd;
+        
+        /// <summary>
+        /// btn_registration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_registration;
     }
 }

@@ -15,9 +15,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Description</th>
-                        <th>Applicant Type</th>
-                        <th>Service Type</th>
+                        <th>Description</th>  
                         <th>Currency</th>
                         <th>Amount</th>
                     </tr>
@@ -25,7 +23,7 @@
                 <tbody>
                   <%
                      var nav = new Config().ReturnNav();
-                     var data = nav.FeeSetup;
+                     var data = nav.CollaborationFeeSetup;
                      int counter = 0;
                      foreach (var item in data)
                      {
@@ -33,9 +31,7 @@
                      %>
                      <tr>
                          <td><%=counter %></td>
-                         <td><% =item.Description%></td>
-                         <td><% =item.Applicant_Type %></td>
-                         <td><% =item.Service_Type %></td>
+                         <td><% =item.Description%></td>                         
                          <td><% =item.Currency_Code %></td>
                          <td><% =item.Amount %></td>
                      <%

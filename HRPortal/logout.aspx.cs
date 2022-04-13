@@ -13,7 +13,7 @@ namespace HRPortal
         {           
             Session["name"] = "";
             Session["idNo"] = "";
-            Response.Redirect("Index.aspx");
+            Response.Redirect("Login.aspx");
         }
     }
 }

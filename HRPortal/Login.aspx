@@ -39,7 +39,7 @@
 <body>
 
 
-      <div class="py-2 bg-primary">
+<%--      <div class="py-2 bg-primary">
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
 	    		<div class="col-lg-12 d-block">
@@ -60,24 +60,25 @@
 			    </div>
 		    </div>
 		  </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
-	    <div class="container d-flex align-items-center">	    
+    </div>--%>
+<%--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+	    <div class="container d-flex align-items-center">
+	    	
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="Index.aspx" class="nav-link pl-0">Home</a></li>
+	        	<%--<li class="nav-item active"><a href="Index.apsx" class="nav-link pl-0">Home</a></li>
 	        	<li class="nav-item"><a href="Login.aspx" class="nav-link">Login</a></li>
-	        	<li class="nav-item"><a href="RequestAccountCreation" class="nav-link">Register</a></li>
-	        		<li class="nav-item"><a href="https://www.cue.or.ke/index.php?option=com_phocadownload&view=category&id=16:standards-and-guidelines&Itemid=187" class="nav-link">Universities Standards and Guidelines</a></li>
-	        	<li class="nav-item"><a href="pricing.html" class="nav-link">FAQs</a></li>	        	
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        	<li class="nav-item"><a href="RequestAccountCreation.aspx" class="nav-link">Register</a></li>
+	        	<li class="nav-item"><a href="https://www.cue.or.ke/index.php?option=com_phocadownload&view=category&id=16:standards-and-guidelines&Itemid=187" class="nav-link">Universities Standards and Guidelines</a></li>
+	        	<li class="nav-item"><a href="FAQs.aspx" class="nav-link">FAQs</a></li>	        	
+	          <li class="nav-item"><a href="ContactUs.aspx" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
 	    </div>
-	  </nav>
+	  </nav>--%>
 
     <form id="form1" runat="server">
         <div class="row" style="width: 100%; display: block; margin: auto;">
@@ -85,7 +86,7 @@
                 <div class="row ">
                     <div style="width:100%">
                         <img src="images/cue-header.jpg" width="100%" height="100px" />
-                        <h3 style="width: 100%; text-align: center;">LICENSING OF STUDENT RECRUITMENT AGENCIES PORTAL</h3>
+                        <h3 style="width: 100%; text-align: center;">COMMISSION FOR UNIVERSITY EDUCATION COLLABORATION PORTAL</h3>
                         <hr />
                     </div>
 
@@ -123,7 +124,7 @@
                 
               </div>
             <div>
-            </div>
+           </div>
         </div>
     </form>
    <script type="text/javascript">

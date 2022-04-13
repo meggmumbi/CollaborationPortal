@@ -26,13 +26,9 @@
                         <th>#</th>
                         <th>Application No</th>
                         <th>Application Status</th>
-                        <th>Application Category</th>
-                        <th>Applicant Type</th>
-                        <th>Institution Name</th>
-                        <th>Registration Certificate</th>
-                        <th>-Physical Address Status</th>
-                        <th>Licence Type</th>
-                        <th>Registration Date</th>
+                        <th>Applicant Type</th>                      
+                        <th>Institution Name</th>                   
+                        <th>-Physical Address </th>  
                         <th>Amount</th>
                         <th>Edit</th>
                      
@@ -52,13 +48,9 @@
                         <td><%=counter %></td>
                         <td><%=item.Application_No %></td>
                         <td><% =item.Application_Status%></td>
-                        <td><% =item.Application_Category %></td>
-                        <td><% =item.Applicant_Type %></td>
-                        <td><% =item.Institution_Name %></td>
-                        <td><% =item.Registration_Certificate %></td>
-                        <td><% =item.Physical_Address_Status %></td>
-                        <td><% = item.Licence_Type_Description%></td>
-                        <td><% = Convert.ToDateTime(item.Registration_Date).ToString("d/MM/yyyy") %></td>
+                        <td><% =item.Type_of_Apply_Institution %></td>                       
+                        <td><% =item.Name_of_Applying_Institution %></td>                      
+                        <td><% =item.Address %></td> 
                         <td><% =item.Application_Amount %></td>                       
                          <td> <label class="btn btn-success" onclick="makePayments('<%=item.Application_No %>', '<%=item.Institution_Name %>')"><i class="fa fa-edit"></i>Make Payments</label></td>                      
                         
@@ -93,6 +85,15 @@
                         <strong>Accreditation Number:</strong>
                         <asp:TextBox runat="server" CssClass="form-control" ID="accreditationnumber" placeholder="Institution Application Number" />
 
+                    </div>
+                        <div class="form-group">
+                        <strong>Select mode of payment</strong>
+                        <asp:DropDownList runat="server" CssClass="form-control" ID="ModesOfPayment">
+                            <asp:ListItem>--select--</asp:ListItem>
+                            <asp:ListItem Value="1">Bank Deposit.</asp:ListItem>
+                            <asp:ListItem Value="2">Mpesa </asp:ListItem>
+                         
+                        </asp:DropDownList>
                     </div>
                     <div class="form-group">
                         <strong>Institution Name:</strong>

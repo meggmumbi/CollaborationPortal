@@ -25,6 +25,11 @@
             </div>
         </div>
     </div>
+      <div class="panel-footer">
+                <asp:Button runat="server" CssClass="btn btn-warning pull-left" Text="Previous" CausesValidation="false" ID="previoes" OnClick="previoes_Click"/>
+             <asp:Button runat="server" CssClass="btn btn-success pull-right " Text="Next" id="next" OnClick="next_Click" />
+            <div class="clearfix"></div>
+        </div>
     <div class="clearfix"></div>
     <script>
         $(document).ready(function () {

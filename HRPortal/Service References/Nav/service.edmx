@@ -15,12 +15,30 @@
         <Key>
           <PropertyRef Name="Application_No" />
           <PropertyRef Name="Code" />
+          <PropertyRef Name="Entry_No" />
         </Key>
         <Property Name="Code" Type="Edm.String" Nullable="false" />
         <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
         <Property Name="Description" Type="Edm.String" />
         <Property Name="Type" Type="Edm.String" />
         <Property Name="Comments" Type="Edm.String" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
+      <EntityType Name="Agency_Sub_Questions">
+        <Key>
+          <PropertyRef Name="Answer_Option" />
+          <PropertyRef Name="Code" />
+          <PropertyRef Name="Parent_Question_ID" />
+          <PropertyRef Name="Question_Category" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Question_Category" Type="Edm.String" Nullable="false" />
+        <Property Name="Parent_Question_ID" Type="Edm.String" Nullable="false" />
+        <Property Name="Answer_Option" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Question_Types" Type="Edm.String" />
+        <Property Name="Answer_Code" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
       <EntityType Name="AgencyQuestionList">
@@ -35,6 +53,43 @@
         <Property Name="Answer_Code" Type="Edm.String" />
         <Property Name="Answer_Option" Type="Edm.String" />
         <Property Name="Blocked" Type="Edm.Boolean" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
+      <EntityType Name="ApplicationPayments">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Line_No" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Payment_Mode" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Payment_Reference" Type="Edm.String" />
+        <Property Name="Amount" Type="Edm.Decimal" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
+      <EntityType Name="Collaboration_Programmes">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Entry_No" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Programme_Name" Type="Edm.String" />
+        <Property Name="Programme_Level" Type="Edm.String" />
+        <Property Name="Evidence_Provided" Type="Edm.Boolean" />
+        <Property Name="Remarks" Type="Edm.String" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
+      <EntityType Name="CollaborationFeeSetup">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Currency_Code" Type="Edm.String" />
+        <Property Name="Applicant_Type" Type="Edm.String" />
+        <Property Name="Amount" Type="Edm.Decimal" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
       <EntityType Name="Countries">
@@ -211,6 +266,8 @@
         <Property Name="Expired_Licences" Type="Edm.Int32" />
         <Property Name="Currency_Code" Type="Edm.String" />
         <Property Name="Amount" Type="Edm.Decimal" />
+        <Property Name="License_Types" Type="Edm.String" />
+        <Property Name="Process_Type" Type="Edm.String" />
         <Property Name="Licence_Nos" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
@@ -286,6 +343,15 @@
         <NavigationProperty Name="Budget_Control_Job_No_Link" Relationship="NAV.ProcurementPlanEntry_Budget_Control_Job_No_Link" ToRole="Budget_Control_Job_No_Link" FromRole="ProcurementPlanEntry" />
         <NavigationProperty Name="Budget_Control_Job_Task_No_Link" Relationship="NAV.ProcurementPlanEntry_Budget_Control_Job_Task_No_Link" ToRole="Budget_Control_Job_Task_No_Link" FromRole="ProcurementPlanEntry" />
       </EntityType>
+      <EntityType Name="ProgramDomain">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Abbreviation" Type="Edm.String" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
       <EntityType Name="ResourceList">
         <Key>
           <PropertyRef Name="No" />
@@ -306,6 +372,16 @@
         <Property Name="Privacy_Blocked" Type="Edm.Boolean" />
         <Property Name="Search_Name" Type="Edm.String" />
         <Property Name="Default_Deferral_Template_Code" Type="Edm.String" />
+        <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
+      </EntityType>
+      <EntityType Name="sourceOfFunds">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="entry_No" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="entry_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
         <Property Name="ETag" Type="Edm.String" ConcurrencyMode="Fixed" />
       </EntityType>
       <EntityType Name="academicenrolldraft">
@@ -586,11 +662,12 @@
         <Key>
           <PropertyRef Name="Application_No" />
           <PropertyRef Name="Code" />
+          <PropertyRef Name="Entry_No" />
         </Key>
         <Property Name="Application_No" Type="Edm.String" Nullable="false" />
         <Property Name="Code" Type="Edm.String" Nullable="false" />
         <Property Name="Description" Type="Edm.String" />
-        <Property Name="Entry_No" Type="Edm.Int32" />
+        <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
         <Property Name="Type" Type="Edm.String" />
         <Property Name="Comments" Type="Edm.String" />
       </EntityType>
@@ -613,6 +690,22 @@
         <Property Name="Quantity" Type="Edm.Int32" />
         <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
       </EntityType>
+      <EntityType Name="AgencyAttachedDocuments">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="AuxiliaryIndex1" />
+          <PropertyRef Name="Entry_No" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Attached" Type="Edm.Boolean" />
+        <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Certificate_No" Type="Edm.String" />
+        <Property Name="Issue_Date" Type="Edm.DateTime" />
+        <Property Name="Expiry_Date" Type="Edm.DateTime" />
+        <Property Name="AuxiliaryIndex1" Type="Edm.String" Nullable="false" />
+      </EntityType>
       <EntityType Name="AgencyComplianceSetup">
         <Key>
           <PropertyRef Name="Code" />
@@ -629,6 +722,7 @@
         <Property Name="Description" Type="Edm.String" />
         <Property Name="Blocked" Type="Edm.Boolean" />
         <Property Name="Application_Type" Type="Edm.String" />
+        <Property Name="Appliaction_Area" Type="Edm.String" />
       </EntityType>
       <EntityType Name="AgencyFacilitiesCategories">
         <Key>
@@ -697,6 +791,11 @@
         <Property Name="Accreditation_Status" Type="Edm.String" />
         <Property Name="Accrediting_Body" Type="Edm.String" />
         <Property Name="Entry_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Country_Region_CodeS" Type="Edm.String" />
+        <Property Name="Charter_Reg_Availlable" Type="Edm.Boolean" />
+        <Property Name="MoU_Availlable" Type="Edm.Boolean" />
+        <Property Name="MoA_Availlable" Type="Edm.Boolean" />
+        <Property Name="MoF_Availlable" Type="Edm.Boolean" />
       </EntityType>
       <EntityType Name="AgencyStaffProfile">
         <Key>
@@ -721,6 +820,14 @@
         </Key>
         <Property Name="Code" Type="Edm.String" Nullable="false" />
         <Property Name="Programme_Level" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="AppealReason">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="No_of_Cases" Type="Edm.Int32" />
       </EntityType>
       <EntityType Name="Appeals">
         <Key>
@@ -1099,6 +1206,7 @@
         <Property Name="Domain_Code" Type="Edm.String" />
         <Property Name="Domain_Name" Type="Edm.String" />
         <Property Name="Programme_Name" Type="Edm.String" />
+        <Property Name="Resource_No" Type="Edm.String" />
         <Property Name="No_Of_Questions" Type="Edm.Int32" />
       </EntityType>
       <EntityType Name="AuditRequisitionLines">
@@ -1685,6 +1793,226 @@
         <Property Name="Grade_Point_Average" Type="Edm.Decimal" />
         <Property Name="Percentage_Level" Type="Edm.Decimal" />
         <Property Name="Current_Version" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="collaborationCurriculum">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="Application_Description" Type="Edm.String" />
+        <Property Name="Created_By" Type="Edm.String" />
+        <Property Name="Created_On" Type="Edm.DateTime" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Institution_Email" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Resource_No" Type="Edm.String" />
+        <Property Name="Resource_Name" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="Verdict" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Verdict_Code" Type="Edm.String" />
+        <Property Name="Verdict_Name" Type="Edm.String" />
+        <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Notes" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Institution_Feedback_Date" Type="Edm.DateTime" />
+        <Property Name="Final_Report_Generated" Type="Edm.Boolean" />
+        <Property Name="Linked_to_Report" Type="Edm.String" />
+        <Property Name="verdict_date" Type="Edm.DateTime" />
+        <Property Name="Project_Type" Type="Edm.String" />
+        <Property Name="Percentage_Score" Type="Edm.Decimal" />
+        <Property Name="Aggregate_Score" Type="Edm.Decimal" />
+        <Property Name="Maximum_Aggregate_Score" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="collaborationLicenseEntries">
+        <Key>
+          <PropertyRef Name="License_No" />
+        </Key>
+        <Property Name="Line_No" Type="Edm.Int32" />
+        <Property Name="License_No" Type="Edm.String" Nullable="false" />
+        <Property Name="License_Type" Type="Edm.String" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="Inspection_Report_No" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Issue_Date" Type="Edm.DateTime" />
+        <Property Name="Issue_Time" Type="Edm.String" />
+        <Property Name="Expiry_Date" Type="Edm.DateTime" />
+        <Property Name="Expiry_Time" Type="Edm.String" />
+        <Property Name="Issued_By" Type="Edm.String" />
+        <Property Name="Preliminary_Verdict" Type="Edm.String" />
+        <Property Name="License_Type_Description" Type="Edm.String" />
+        <Property Name="Renewal_Status" Type="Edm.String" />
+        <Property Name="Renewed_License_No" Type="Edm.String" />
+        <Property Name="Renewed_On" Type="Edm.DateTime" />
+        <Property Name="Renewed_By" Type="Edm.String" />
+        <Property Name="Collaborator_Institution_Name" Type="Edm.String" />
+        <Property Name="Account_No" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="CollaborationResources">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Line_No" />
+          <PropertyRef Name="Resource_Type" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Resource_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Item_No" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Number" Type="Edm.Int32" />
+        <Property Name="Capacity" Type="Edm.String" />
+        <Property Name="Usage" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Journals_No_Of_Titles" Type="Edm.Int32" />
+        <Property Name="Remarks" Type="Edm.String" />
+        <Property Name="Rank" Type="Edm.String" />
+        <Property Name="Qualification" Type="Edm.String" />
+        <Property Name="Area_of_Specialization" Type="Edm.String" />
+        <Property Name="Qualification_Type" Type="Edm.String" />
+        <Property Name="Volumes" Type="Edm.String" />
+        <Property Name="Terms_of_Service" Type="Edm.String" />
+        <Property Name="Gender" Type="Edm.String" />
+        <Property Name="Institution" Type="Edm.String" />
+        <Property Name="Completion_Date" Type="Edm.DateTime" />
+        <Property Name="Specific_to_Department" Type="Edm.Int32" />
+        <Property Name="Shared" Type="Edm.Int32" />
+        <Property Name="Unit_of_Measure" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="CollaborationResourcesList">
+        <Key>
+          <PropertyRef Name="Item_No" />
+        </Key>
+        <Property Name="Item_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Resource_Type" Type="Edm.String" />
+        <Property Name="Line_No" Type="Edm.Int32" />
+        <Property Name="Name" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="CollaborationSiteLines">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Code" />
+          <PropertyRef Name="Evaluation_Header_No" />
+        </Key>
+        <Property Name="Code" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Component_Code" Type="Edm.String" />
+        <Property Name="Component_Description" Type="Edm.String" />
+        <Property Name="Sub_Component_Code" Type="Edm.String" />
+        <Property Name="Sub_Component_Description" Type="Edm.String" />
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Maximum_Score" Type="Edm.Decimal" />
+        <Property Name="Score" Type="Edm.Decimal" />
+        <Property Name="Strength" Type="Edm.String" />
+        <Property Name="Weakness" Type="Edm.String" />
+        <Property Name="Recommendation" Type="Edm.String" />
+        <Property Name="Evaluation_Header_No" Type="Edm.String" Nullable="false" />
+        <Property Name="CUE_Comment" Type="Edm.String" />
+        <Property Name="Vendor_No" Type="Edm.String" />
+        <Property Name="Instiution_Feedback" Type="Edm.String" />
+        <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Not_Applicable" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="collabResourceAllocation">
+        <Key>
+          <PropertyRef Name="AuxiliaryIndex1" />
+          <PropertyRef Name="Code" />
+          <PropertyRef Name="jobcode" />
+          <PropertyRef Name="Job_No" />
+          <PropertyRef Name="Resource_Card_No" />
+        </Key>
+        <Property Name="Code" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Job_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Job_Task_Code" Type="Edm.String" />
+        <Property Name="Job_Task_Description" Type="Edm.String" />
+        <Property Name="Account_Type" Type="Edm.String" />
+        <Property Name="Account_No" Type="Edm.String" />
+        <Property Name="Account_Name" Type="Edm.String" />
+        <Property Name="Work_Type" Type="Edm.String" />
+        <Property Name="Amount" Type="Edm.Decimal" />
+        <Property Name="Total_Cost" Type="Edm.Decimal" />
+        <Property Name="Quantity" Type="Edm.Int32" />
+        <Property Name="Resource_Card_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Book_Payment" Type="Edm.Boolean" />
+        <Property Name="Booked" Type="Edm.Boolean" />
+        <Property Name="Confirmed" Type="Edm.Boolean" />
+        <Property Name="Job_Accepted" Type="Edm.Boolean" />
+        <Property Name="Job_Rejected" Type="Edm.Boolean" />
+        <Property Name="Team_Leader" Type="Edm.Boolean" />
+        <Property Name="Replacement_Account_No" Type="Edm.String" />
+        <Property Name="Replacement_Account_Name" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Notified" Type="Edm.Boolean" />
+        <Property Name="Notified_On" Type="Edm.DateTime" />
+        <Property Name="Appoint" Type="Edm.Boolean" />
+        <Property Name="Appointed_On" Type="Edm.DateTime" />
+        <Property Name="Reason_For_Rejection" Type="Edm.String" />
+        <Property Name="Programme_Name" Type="Edm.String" />
+        <Property Name="Institution" Type="Edm.String" />
+        <Property Name="Unavailability_Reason" Type="Edm.String" />
+        <Property Name="Reason_Description" Type="Edm.String" />
+        <Property Name="Reason_Logged_By" Type="Edm.String" />
+        <Property Name="Reason_Date" Type="Edm.DateTime" />
+        <Property Name="Reason_Logged_On" Type="Edm.DateTime" />
+        <Property Name="Select" Type="Edm.Boolean" />
+        <Property Name="Individual_Report_Submitted" Type="Edm.Boolean" />
+        <Property Name="Group_Report_Submitted" Type="Edm.Boolean" />
+        <Property Name="jobcode" Type="Edm.String" Nullable="false" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Created_By" Type="Edm.String" />
+        <Property Name="Created_On" Type="Edm.DateTime" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="Accreditation_No" Type="Edm.String" />
+        <Property Name="Appointment_Date" Type="Edm.DateTime" />
+        <Property Name="Start_Date" Type="Edm.DateTime" />
+        <Property Name="Tentative_End_Date" Type="Edm.DateTime" />
+        <Property Name="Posted_Date" Type="Edm.DateTime" />
+        <Property Name="Accreditation_Type" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Project_Type" Type="Edm.String" />
+        <Property Name="AuxiliaryIndex1" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="CollabResourceAllocation">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Line_No" />
+          <PropertyRef Name="Resource_Type" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Resource_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Item_No" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Number" Type="Edm.Int32" />
+        <Property Name="Capacity" Type="Edm.String" />
+        <Property Name="Usage" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Journals_No_Of_Titles" Type="Edm.Int32" />
+        <Property Name="Remarks" Type="Edm.String" />
+        <Property Name="Rank" Type="Edm.String" />
+        <Property Name="Qualification" Type="Edm.String" />
+        <Property Name="Area_of_Specialization" Type="Edm.String" />
+        <Property Name="Qualification_Type" Type="Edm.String" />
+        <Property Name="Volumes" Type="Edm.String" />
+        <Property Name="Terms_of_Service" Type="Edm.String" />
+        <Property Name="Gender" Type="Edm.String" />
+        <Property Name="Institution" Type="Edm.String" />
+        <Property Name="Completion_Date" Type="Edm.DateTime" />
+        <Property Name="Specific_to_Department" Type="Edm.Int32" />
+        <Property Name="Shared" Type="Edm.Int32" />
+        <Property Name="Unit_of_Measure" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="collabSiteSubComp">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Component_Code" Type="Edm.String" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Maximum_Score" Type="Edm.Decimal" />
       </EntityType>
       <EntityType Name="CompanyInformation">
         <Key>
@@ -2482,13 +2810,13 @@
         <Key>
           <PropertyRef Name="AuxiliaryIndex1" />
           <PropertyRef Name="AuxiliaryIndex2" />
-          <PropertyRef Name="AuxiliaryIndex3" />
+          <PropertyRef Name="Code" />
         </Key>
         <Property Name="Account_No" Type="Edm.String" />
         <Property Name="Team_Leader" Type="Edm.Boolean" />
-        <Property Name="AuxiliaryIndex1" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Code" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AuxiliaryIndex1" Type="Edm.String" Nullable="false" />
         <Property Name="AuxiliaryIndex2" Type="Edm.String" Nullable="false" />
-        <Property Name="AuxiliaryIndex3" Type="Edm.String" Nullable="false" />
       </EntityType>
       <EntityType Name="ExpectedandActual">
         <Key>
@@ -4244,7 +4572,7 @@
         <Property Name="Appeal_Application" Type="Edm.String" />
         <Property Name="Submitted" Type="Edm.Boolean" />
         <Property Name="Accreditation_Status" Type="Edm.String" />
-        <Property Name="Accrediting_Body" Type="Edm.String" />
+        <Property Name="Foreign_Uni_Accrediting_Body" Type="Edm.String" />
         <Property Name="No_Series" Type="Edm.String" />
         <Property Name="paymentReference" Type="Edm.String" />
         <Property Name="paymentAttachment" Type="Edm.Boolean" />
@@ -4280,6 +4608,44 @@
         <Property Name="HOA_Email_Address" Type="Edm.String" />
         <Property Name="License_Type" Type="Edm.String" />
         <Property Name="Renewed_License" Type="Edm.String" />
+        <Property Name="Alternative_Phone_No" Type="Edm.String" />
+        <Property Name="WhatsApp_No" Type="Edm.String" />
+        <Property Name="Website" Type="Edm.String" />
+        <Property Name="License_Options" Type="Edm.String" />
+        <Property Name="SAR_Template_No" Type="Edm.String" />
+        <Property Name="Incorporation_Date" Type="Edm.DateTime" />
+        <Property Name="Certificate_Type" Type="Edm.String" />
+        <Property Name="Citizenship_Type" Type="Edm.String" />
+        <Property Name="Country_of_Origin" Type="Edm.String" />
+        <Property Name="Appeal_Status" Type="Edm.String" />
+        <Property Name="Appeal_Verdict" Type="Edm.String" />
+        <Property Name="Reason_for_Rejection" Type="Edm.String" />
+        <Property Name="Name_of_Foreign_University" Type="Edm.String" />
+        <Property Name="Postal_Address" Type="Edm.String" />
+        <Property Name="Physical_Address" Type="Edm.String" />
+        <Property Name="Telephone_No" Type="Edm.String" />
+        <Property Name="Email_Address" Type="Edm.String" />
+        <Property Name="Web_site" Type="Edm.String" />
+        <Property Name="Name_of_the_Programme_offered" Type="Edm.String" />
+        <Property Name="Capital_in_Kshs" Type="Edm.Decimal" />
+        <Property Name="Recurrent_in_Ksh" Type="Edm.Decimal" />
+        <Property Name="Local_Accreditation_Status" Type="Edm.String" />
+        <Property Name="Local_Academic_Focus" Type="Edm.String" />
+        <Property Name="Local_Research_Focus" Type="Edm.String" />
+        <Property Name="Benefit_of_the_collaboration" Type="Edm.String" />
+        <Property Name="Foreign_University_Country" Type="Edm.String" />
+        <Property Name="Primary_Academic_Focus" Type="Edm.String" />
+        <Property Name="Principal_Research_Focus" Type="Edm.String" />
+        <Property Name="Account_No" Type="Edm.String" />
+        <Property Name="Local_Uni_Accrediting_Body" Type="Edm.String" />
+        <Property Name="Name_of_Applying_Institution" Type="Edm.String" />
+        <Property Name="Type_of_Apply_Institution" Type="Edm.String" />
+        <Property Name="Qualification_Type" Type="Edm.String" />
+        <Property Name="Student_Staff_ratio" Type="Edm.String" />
+        <Property Name="Staff_Teaching_Load_per_Prog" Type="Edm.String" />
+        <Property Name="Total_Amount" Type="Edm.Decimal" />
+        <Property Name="Receipted_Amount" Type="Edm.Decimal" />
+        <Property Name="Total_Amount_Paid" Type="Edm.Decimal" />
       </EntityType>
       <EntityType Name="LicenceType">
         <Key>
@@ -4293,6 +4659,60 @@
         <Property Name="Currency_Code" Type="Edm.String" />
         <Property Name="Amount" Type="Edm.Decimal" />
         <Property Name="Licence_Nos" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="LicensingEntries">
+        <Key>
+          <PropertyRef Name="License_No" />
+        </Key>
+        <Property Name="Line_No" Type="Edm.Int32" />
+        <Property Name="License_No" Type="Edm.String" Nullable="false" />
+        <Property Name="License_Type" Type="Edm.String" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="Inspection_Report_No" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Issue_Date" Type="Edm.DateTime" />
+        <Property Name="Issue_Time" Type="Edm.String" />
+        <Property Name="Expiry_Date" Type="Edm.DateTime" />
+        <Property Name="Expiry_Time" Type="Edm.String" />
+        <Property Name="Issued_By" Type="Edm.String" />
+        <Property Name="Preliminary_Verdict" Type="Edm.String" />
+        <Property Name="License_Type_Description" Type="Edm.String" />
+        <Property Name="Renewal_Status" Type="Edm.String" />
+        <Property Name="Renewed_License_No" Type="Edm.String" />
+        <Property Name="Renewed_On" Type="Edm.DateTime" />
+        <Property Name="Renewed_By" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="LicensingSetup">
+        <Key>
+          <PropertyRef Name="Primary_Key" />
+        </Key>
+        <Property Name="Primary_Key" Type="Edm.String" Nullable="false" />
+        <Property Name="Application_Nos" Type="Edm.String" />
+        <Property Name="Completeness_Voucher_Nos" Type="Edm.String" />
+        <Property Name="Verification_Vouchers_Nos" Type="Edm.String" />
+        <Property Name="Certificate_Nos" Type="Edm.String" />
+        <Property Name="SREQ_Email" Type="Edm.String" />
+        <Property Name="Resource" Type="Edm.String" />
+        <Property Name="Customer_Posting_Group" Type="Edm.String" />
+        <Property Name="Gen_Bus_Posting_Group" Type="Edm.String" />
+        <Property Name="REQ_Criteria_Template_Nos" Type="Edm.String" />
+        <Property Name="Default_REQ_Criteria_Template" Type="Edm.String" />
+        <Property Name="REQ_Committee_Nos" Type="Edm.String" />
+        <Property Name="Verific_REQ_Criteria_Template" Type="Edm.String" />
+        <Property Name="License_Application_Nos" Type="Edm.String" />
+        <Property Name="Licensing_Resource" Type="Edm.String" />
+        <Property Name="Lcs_Customer_Posting_Group" Type="Edm.String" />
+        <Property Name="Lcs_Gen_Bus_Posting_Group" Type="Edm.String" />
+        <Property Name="Lcs_Completeness_Voucher_Nos" Type="Edm.String" />
+        <Property Name="Lcs_Verification_Vouchers_Nos" Type="Edm.String" />
+        <Property Name="Lcs_Completeness_Template" Type="Edm.String" />
+        <Property Name="Lcs_Verification_Template" Type="Edm.String" />
+        <Property Name="Site_Inspection_Nos" Type="Edm.String" />
+        <Property Name="Site_Resource_Allocation_Nos" Type="Edm.String" />
+        <Property Name="Site_Inspection_Template" Type="Edm.String" />
+        <Property Name="Site_Inspection_Template_Nos" Type="Edm.String" />
+        <Property Name="License_Renewal_Nos" Type="Edm.String" />
       </EntityType>
       <EntityType Name="Locations">
         <Key>
@@ -5494,6 +5914,47 @@
         <Property Name="Comments" Type="Edm.String" />
         <Property Name="Institution_No" Type="Edm.String" />
       </EntityType>
+      <EntityType Name="ProgrammeEvaluationHeader">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="Application_Description" Type="Edm.String" />
+        <Property Name="Created_By" Type="Edm.String" />
+        <Property Name="Created_On" Type="Edm.DateTime" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Institution_Email" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Resource_No" Type="Edm.String" />
+        <Property Name="Resource_Name" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="Verdict" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Percentage_Score" Type="Edm.Decimal" />
+        <Property Name="Document_Status" Type="Edm.String" />
+        <Property Name="DCS_UserId" Type="Edm.String" />
+        <Property Name="DCS_Approval_Date" Type="Edm.DateTime" />
+        <Property Name="DCS_Comment" Type="Edm.String" />
+        <Property Name="CEO_UserID" Type="Edm.String" />
+        <Property Name="CEO_Approval_Date" Type="Edm.DateTime" />
+        <Property Name="CEO_Comment" Type="Edm.String" />
+        <Property Name="HOD_UserID" Type="Edm.String" />
+        <Property Name="HOD_Approval_Date" Type="Edm.DateTime" />
+        <Property Name="HOD_Comment" Type="Edm.String" />
+        <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Insitution_Code" Type="Edm.String" />
+        <Property Name="Meeting_Date" Type="Edm.DateTime" />
+        <Property Name="Meeting_Link" Type="Edm.String" />
+        <Property Name="Meeting_Time" Type="Edm.String" />
+        <Property Name="verdict_date" Type="Edm.DateTime" />
+        <Property Name="VerdictDate" Type="Edm.String" />
+        <Property Name="Field36" Type="Edm.String" />
+        <Property Name="Field37" Type="Edm.String" />
+        <Property Name="Aggregate_Score" Type="Edm.Decimal" />
+        <Property Name="Maximum_Aggregate_Score" Type="Edm.Decimal" />
+      </EntityType>
       <EntityType Name="ProgrammeObjective">
         <Key>
           <PropertyRef Name="Code" />
@@ -5571,9 +6032,25 @@
         <Property Name="Code" Type="Edm.String" Nullable="false" />
         <Property Name="Application_No" Type="Edm.String" />
         <Property Name="Application_Description" Type="Edm.String" />
+        <Property Name="Created_By" Type="Edm.String" />
         <Property Name="Created_On" Type="Edm.DateTime" />
         <Property Name="Status" Type="Edm.String" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Institution_Email" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
         <Property Name="Resource_No" Type="Edm.String" />
+        <Property Name="Resource_Name" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="Verdict" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Percentage_Score" Type="Edm.Decimal" />
+        <Property Name="Verdict_Code" Type="Edm.String" />
+        <Property Name="Verdict_Name" Type="Edm.String" />
+        <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Notes" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Aggregate_Score" Type="Edm.Decimal" />
+        <Property Name="Maximum_Aggregate_Score" Type="Edm.Decimal" />
       </EntityType>
       <EntityType Name="ProgrammeSiteEvaluationVoucher">
         <Key>
@@ -5736,6 +6213,7 @@
         <Property Name="Vendor_No" Type="Edm.String" />
         <Property Name="Instiution_Feedback" Type="Edm.String" />
         <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Not_Applicable" Type="Edm.Boolean" />
       </EntityType>
       <EntityType Name="ProgrammeSiteSubcomponent">
         <Key>
@@ -6644,6 +7122,12 @@
           <PropertyRef Name="Job_No" />
           <PropertyRef Name="Resource_Card_No" />
         </Key>
+        <Property Name="Team_Leader" Type="Edm.Boolean" />
+        <Property Name="Applicable_area" Type="Edm.String" />
+        <Property Name="Individual_Report_Submitted" Type="Edm.Boolean" />
+        <Property Name="Group_Report_Submitted" Type="Edm.Boolean" />
+        <Property Name="Role" Type="Edm.String" />
+        <Property Name="Appoint" Type="Edm.Boolean" />
         <Property Name="Code" Type="Edm.Int32" Nullable="false" />
         <Property Name="Job_No" Type="Edm.String" Nullable="false" />
         <Property Name="Job_Task_Code" Type="Edm.String" />
@@ -6670,6 +7154,7 @@
         <Property Name="Accreditation_Type" Type="Edm.String" />
         <Property Name="Programme_Name" Type="Edm.String" />
         <Property Name="Instiution" Type="Edm.String" />
+        <Property Name="Project_Type" Type="Edm.String" />
       </EntityType>
       <EntityType Name="ResourceAllocationLines">
         <Key>
@@ -7118,6 +7603,52 @@
         <Property Name="No_Series" Type="Edm.String" />
         <Property Name="Capex" Type="Edm.Boolean" />
       </EntityType>
+      <EntityType Name="Sitecomponents">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Component_Description" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="SiteInspectionComments">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" />
+        <Property Name="Application_No" Type="Edm.String" />
+        <Property Name="User_ID" Type="Edm.String" />
+        <Property Name="User_Name" Type="Edm.String" />
+        <Property Name="Date_Created" Type="Edm.DateTime" />
+        <Property Name="User_Category" Type="Edm.String" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Verdict" Type="Edm.String" />
+        <Property Name="Report_Status" Type="Edm.String" />
+        <Property Name="Comments" Type="Edm.String" />
+        <Property Name="Published" Type="Edm.Boolean" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="Assinged_officer" Type="Edm.String" />
+        <Property Name="Institution_No" Type="Edm.String" />
+        <Property Name="Institution_Name" Type="Edm.String" />
+        <Property Name="Campus_No" Type="Edm.String" />
+        <Property Name="Campus_Name" Type="Edm.String" />
+        <Property Name="Institution_Email" Type="Edm.String" />
+        <Property Name="Resource_No" Type="Edm.String" />
+        <Property Name="Resource_Name" Type="Edm.String" />
+        <Property Name="Employee_No" Type="Edm.String" />
+        <Property Name="Resource_Email" Type="Edm.String" />
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="Posted" Type="Edm.Boolean" />
+        <Property Name="Posted_By" Type="Edm.String" />
+        <Property Name="Posted_Date" Type="Edm.DateTime" />
+        <Property Name="No_of_Annual_Insepctions" Type="Edm.Int32" />
+        <Property Name="Date_Submitted" Type="Edm.DateTime" />
+        <Property Name="Evaluation_Category" Type="Edm.String" />
+        <Property Name="Expected_Feedback_Date" Type="Edm.DateTime" />
+        <Property Name="Inspection_Date" Type="Edm.DateTime" />
+        <Property Name="Notified" Type="Edm.Boolean" />
+        <Property Name="Notified_On" Type="Edm.DateTime" />
+        <Property Name="Application_Type" Type="Edm.String" />
+      </EntityType>
       <EntityType Name="SourcesofIncome">
         <Key>
           <PropertyRef Name="No" />
@@ -7475,6 +8006,20 @@
         <Property Name="Advice_Termination_of_studies" Type="Edm.Boolean" />
         <Property Name="Career_prospects_Information" Type="Edm.Boolean" />
         <Property Name="Labour_market_Opportunities" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="StudentStatistics">
+        <Key>
+          <PropertyRef Name="Application_No" />
+          <PropertyRef Name="Course_Type" />
+        </Key>
+        <Property Name="Application_No" Type="Edm.String" Nullable="false" />
+        <Property Name="Entry_No" Type="Edm.Int32" />
+        <Property Name="Course_Type" Type="Edm.String" Nullable="false" />
+        <Property Name="Female" Type="Edm.Int32" />
+        <Property Name="Male" Type="Edm.Int32" />
+        <Property Name="County" Type="Edm.String" />
+        <Property Name="Total" Type="Edm.Int32" />
+        <Property Name="Course" Type="Edm.String" />
       </EntityType>
       <EntityType Name="StudentSupportWeaknessStrength">
         <Key>
@@ -8180,6 +8725,130 @@
         <Property Name="Contact" Type="Edm.String" />
         <Property Name="Phone_No" Type="Edm.String" />
         <Property Name="Telex_No" Type="Edm.String" />
+        <Property Name="Our_Account_No" Type="Edm.String" />
+        <Property Name="Territory_Code" Type="Edm.String" />
+        <Property Name="Country_Region_Code" Type="Edm.String" />
+        <Property Name="Blocked" Type="Edm.String" />
+        <Property Name="Pay_to_Vendor_No" Type="Edm.String" />
+        <Property Name="Priority" Type="Edm.Int32" />
+        <Property Name="Payment_Method_Code" Type="Edm.String" />
+        <Property Name="Last_Date_Modified" Type="Edm.DateTime" />
+        <Property Name="Application_Method" Type="Edm.String" />
+        <Property Name="Prices_Including_VAT" Type="Edm.Boolean" />
+        <Property Name="Fax_No" Type="Edm.String" />
+        <Property Name="Telex_Answer_Back" Type="Edm.String" />
+        <Property Name="VAT_Registration_No" Type="Edm.String" />
+        <Property Name="Gen_Bus_Posting_Group" Type="Edm.String" />
+        <Property Name="Post_Code" Type="Edm.String" />
+        <Property Name="County" Type="Edm.String" />
+        <Property Name="E_Mail" Type="Edm.String" />
+        <Property Name="Home_Page" Type="Edm.String" />
+        <Property Name="No_Series" Type="Edm.String" />
+        <Property Name="Tax_Area_Code" Type="Edm.String" />
+        <Property Name="Tax_Liable" Type="Edm.Boolean" />
+        <Property Name="VAT_Bus_Posting_Group" Type="Edm.String" />
+        <Property Name="Block_Payment_Tolerance" Type="Edm.Boolean" />
+        <Property Name="IC_Partner_Code" Type="Edm.String" />
+        <Property Name="Prepayment" Type="Edm.Decimal" />
+        <Property Name="Partner_Type" Type="Edm.String" />
+        <Property Name="Creditor_No" Type="Edm.String" />
+        <Property Name="Preferred_Bank_Account_Code" Type="Edm.String" />
+        <Property Name="Cash_Flow_Payment_Terms_Code" Type="Edm.String" />
+        <Property Name="Primary_Contact_No" Type="Edm.String" />
+        <Property Name="Responsibility_Center" Type="Edm.String" />
+        <Property Name="Location_Code" Type="Edm.String" />
+        <Property Name="Lead_Time_Calculation" Type="Edm.String" />
+        <Property Name="Base_Calendar_Code" Type="Edm.String" />
+        <Property Name="Document_Sending_Profile" Type="Edm.String" />
+        <Property Name="Vendor_Type" Type="Edm.String" />
+        <Property Name="PIN_Number" Type="Edm.String" />
+        <Property Name="Cumm_PAYE" Type="Edm.Decimal" />
+        <Property Name="Taxable_Income" Type="Edm.Decimal" />
+        <Property Name="Payroll_Pay_Mode" Type="Edm.String" />
+        <Property Name="Pays_tax" Type="Edm.Boolean" />
+        <Property Name="Shortcut_Dimension_3_Code" Type="Edm.String" />
+        <Property Name="Shortcut_Dimension_4_Code" Type="Edm.String" />
+        <Property Name="Shortcut_Dimension_5_Code" Type="Edm.String" />
+        <Property Name="Vendorname" Type="Edm.String" />
+        <Property Name="Vendor_Credit_Limit_LCY" Type="Edm.Decimal" />
+        <Property Name="Requisition_Default_Vendor" Type="Edm.Boolean" />
+        <Property Name="Vendor_Retention_Account" Type="Edm.String" />
+        <Property Name="Retention" Type="Edm.Boolean" />
+        <Property Name="Tel" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="Bank_Account_Number" Type="Edm.String" />
+        <Property Name="Bank_Branch" Type="Edm.String" />
+        <Property Name="Vendor_s_Bank" Type="Edm.String" />
+        <Property Name="Status" Type="Edm.String" />
+        <Property Name="Appointment_Date" Type="Edm.DateTime" />
+        <Property Name="Termination_Date" Type="Edm.DateTime" />
+        <Property Name="password" Type="Edm.String" />
+        <Property Name="ID_Number" Type="Edm.String" />
+        <Property Name="Highest_Academic_Qualification" Type="Edm.String" />
+        <Property Name="Title" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.Boolean" />
+        <Property Name="Balance" Type="Edm.Decimal" />
+        <Property Name="Balance_LCY" Type="Edm.Decimal" />
+        <Property Name="Net_Change" Type="Edm.Decimal" />
+        <Property Name="Net_Change_LCY" Type="Edm.Decimal" />
+        <Property Name="Purchases_LCY" Type="Edm.Decimal" />
+        <Property Name="Inv_Discounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Pmt_Discounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Balance_Due" Type="Edm.Decimal" />
+        <Property Name="Balance_Due_LCY" Type="Edm.Decimal" />
+        <Property Name="Payments" Type="Edm.Decimal" />
+        <Property Name="Invoice_Amounts" Type="Edm.Decimal" />
+        <Property Name="Cr_Memo_Amounts" Type="Edm.Decimal" />
+        <Property Name="Payments_LCY" Type="Edm.Decimal" />
+        <Property Name="Inv_Amounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Cr_Memo_Amounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Fin_Charge_Memo_Amounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Outstanding_Orders" Type="Edm.Decimal" />
+        <Property Name="Amt_Rcd_Not_Invoiced" Type="Edm.Decimal" />
+        <Property Name="Debit_Amount" Type="Edm.Decimal" />
+        <Property Name="Credit_Amount" Type="Edm.Decimal" />
+        <Property Name="Debit_Amount_LCY" Type="Edm.Decimal" />
+        <Property Name="Credit_Amount_LCY" Type="Edm.Decimal" />
+        <Property Name="Reminder_Amounts" Type="Edm.Decimal" />
+        <Property Name="Reminder_Amounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Outstanding_Orders_LCY" Type="Edm.Decimal" />
+        <Property Name="Amt_Rcd_Not_Invoiced_LCY" Type="Edm.Decimal" />
+        <Property Name="Pmt_Disc_Tolerance_LCY" Type="Edm.Decimal" />
+        <Property Name="Pmt_Tolerance_LCY" Type="Edm.Decimal" />
+        <Property Name="Refunds" Type="Edm.Decimal" />
+        <Property Name="Refunds_LCY" Type="Edm.Decimal" />
+        <Property Name="Other_Amounts" Type="Edm.Decimal" />
+        <Property Name="Other_Amounts_LCY" Type="Edm.Decimal" />
+        <Property Name="Outstanding_Invoices" Type="Edm.Decimal" />
+        <Property Name="Outstanding_Invoices_LCY" Type="Edm.Decimal" />
+        <Property Name="Pay_to_No_Of_Archived_Doc" Type="Edm.Int32" />
+        <Property Name="Buy_from_No_Of_Archived_Doc" Type="Edm.Int32" />
+        <Property Name="No_of_Pstd_Receipts" Type="Edm.Int32" />
+        <Property Name="No_of_Pstd_Invoices" Type="Edm.Int32" />
+        <Property Name="No_of_Pstd_Return_Shipments" Type="Edm.Int32" />
+        <Property Name="No_of_Pstd_Credit_Memos" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Orders" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Invoices" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Return_Orders" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Credit_Memos" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Pstd_Receipts" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Pstd_Invoices" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Pstd_Return_S" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Pstd_Cr_Memos" Type="Edm.Int32" />
+        <Property Name="No_of_Quotes" Type="Edm.Int32" />
+        <Property Name="No_of_Blanket_Orders" Type="Edm.Int32" />
+        <Property Name="No_of_Orders" Type="Edm.Int32" />
+        <Property Name="No_of_Invoices" Type="Edm.Int32" />
+        <Property Name="No_of_Return_Orders" Type="Edm.Int32" />
+        <Property Name="No_of_Credit_Memos" Type="Edm.Int32" />
+        <Property Name="No_of_Order_Addresses" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Quotes" Type="Edm.Int32" />
+        <Property Name="Pay_to_No_of_Blanket_Orders" Type="Edm.Int32" />
+        <Property Name="Total_Allowances" Type="Edm.Decimal" />
+        <Property Name="Total_Deductions" Type="Edm.Decimal" />
+        <Property Name="Non_Cash_Benefit" Type="Edm.Decimal" />
+        <Property Name="Bank_Name" Type="Edm.String" />
+        <Property Name="Bank_Branch_Name" Type="Edm.String" />
       </EntityType>
       <EntityType Name="vendorBalancesheet">
         <Key>
@@ -8541,6 +9210,22 @@
         <Property Name="Debit_Amount_LCY" Type="Edm.Decimal" />
         <Property Name="Credit_Amount_LCY" Type="Edm.Decimal" />
         <Property Name="Original_Amount" Type="Edm.Decimal" />
+      </EntityType>
+      <EntityType Name="VoteHeads">
+        <Key>
+          <PropertyRef Name="AccountsCode" />
+          <PropertyRef Name="Code" />
+          <PropertyRef Name="MyCategoryCode" />
+        </Key>
+        <Property Name="AccountsCode" Type="Edm.String" Nullable="false" />
+        <Property Name="AccountsDescription" Type="Edm.String" />
+        <Property Name="AccountsSubCategoryCode" Type="Edm.String" />
+        <Property Name="Code" Type="Edm.Int32" Nullable="false" />
+        <Property Name="University_No" Type="Edm.String" />
+        <Property Name="Library_Policy_Uploaded" Type="Edm.Boolean" />
+        <Property Name="CategoryCode" Type="Edm.String" />
+        <Property Name="MyCategoryCode" Type="Edm.String" Nullable="false" />
+        <Property Name="MyCategoryDescription" Type="Edm.String" />
       </EntityType>
       <EntityType Name="Waste_Management">
         <Key>
@@ -9052,7 +9737,11 @@
         <Property Name="Name" Type="Edm.String" Nullable="false" />
         <NavigationProperty Name="AccreditationCategories" Relationship="NAV.Company_AccreditationCategories" ToRole="AccreditationCategories" FromRole="Company" />
         <NavigationProperty Name="Agency_ActivitiesPage" Relationship="NAV.Company_Agency_ActivitiesPage" ToRole="Agency_ActivitiesPage" FromRole="Company" />
+        <NavigationProperty Name="Agency_Sub_Questions" Relationship="NAV.Company_Agency_Sub_Questions" ToRole="Agency_Sub_Questions" FromRole="Company" />
         <NavigationProperty Name="AgencyQuestionList" Relationship="NAV.Company_AgencyQuestionList" ToRole="AgencyQuestionList" FromRole="Company" />
+        <NavigationProperty Name="ApplicationPayments" Relationship="NAV.Company_ApplicationPayments" ToRole="ApplicationPayments" FromRole="Company" />
+        <NavigationProperty Name="Collaboration_Programmes" Relationship="NAV.Company_Collaboration_Programmes" ToRole="Collaboration_Programmes" FromRole="Company" />
+        <NavigationProperty Name="CollaborationFeeSetup" Relationship="NAV.Company_CollaborationFeeSetup" ToRole="CollaborationFeeSetup" FromRole="Company" />
         <NavigationProperty Name="Countries" Relationship="NAV.Company_Countries" ToRole="Countries" FromRole="Company" />
         <NavigationProperty Name="CSPStrategies" Relationship="NAV.Company_CSPStrategies" ToRole="CSPStrategies" FromRole="Company" />
         <NavigationProperty Name="CurrentProcurementPlan" Relationship="NAV.Company_CurrentProcurementPlan" ToRole="CurrentProcurementPlan" FromRole="Company" />
@@ -9065,7 +9754,9 @@
         <NavigationProperty Name="LicenceTypeList" Relationship="NAV.Company_LicenceTypeList" ToRole="LicenceTypeList" FromRole="Company" />
         <NavigationProperty Name="PostCodes" Relationship="NAV.Company_PostCodes" ToRole="PostCodes" FromRole="Company" />
         <NavigationProperty Name="ProcurementPlanEntry" Relationship="NAV.Company_ProcurementPlanEntry" ToRole="ProcurementPlanEntry" FromRole="Company" />
+        <NavigationProperty Name="ProgramDomain" Relationship="NAV.Company_ProgramDomain" ToRole="ProgramDomain" FromRole="Company" />
         <NavigationProperty Name="ResourceList" Relationship="NAV.Company_ResourceList" ToRole="ResourceList" FromRole="Company" />
+        <NavigationProperty Name="sourceOfFunds" Relationship="NAV.Company_sourceOfFunds" ToRole="sourceOfFunds" FromRole="Company" />
         <NavigationProperty Name="academicenrolldraft" Relationship="NAV.Company_academicenrolldraft" ToRole="academicenrolldraft" FromRole="Company" />
         <NavigationProperty Name="AcademicLevels" Relationship="NAV.Company_AcademicLevels" ToRole="AcademicLevels" FromRole="Company" />
         <NavigationProperty Name="AcademicProgrammeLeader" Relationship="NAV.Company_AcademicProgrammeLeader" ToRole="AcademicProgrammeLeader" FromRole="Company" />
@@ -9082,6 +9773,7 @@
         <NavigationProperty Name="AgencyActivities" Relationship="NAV.Company_AgencyActivities" ToRole="AgencyActivities" FromRole="Company" />
         <NavigationProperty Name="AgencyActivitiesSetup" Relationship="NAV.Company_AgencyActivitiesSetup" ToRole="AgencyActivitiesSetup" FromRole="Company" />
         <NavigationProperty Name="AgencyApplicationFacilities" Relationship="NAV.Company_AgencyApplicationFacilities" ToRole="AgencyApplicationFacilities" FromRole="Company" />
+        <NavigationProperty Name="AgencyAttachedDocuments" Relationship="NAV.Company_AgencyAttachedDocuments" ToRole="AgencyAttachedDocuments" FromRole="Company" />
         <NavigationProperty Name="AgencyComplianceSetup" Relationship="NAV.Company_AgencyComplianceSetup" ToRole="AgencyComplianceSetup" FromRole="Company" />
         <NavigationProperty Name="AgencyDocuments" Relationship="NAV.Company_AgencyDocuments" ToRole="AgencyDocuments" FromRole="Company" />
         <NavigationProperty Name="AgencyFacilitiesCategories" Relationship="NAV.Company_AgencyFacilitiesCategories" ToRole="AgencyFacilitiesCategories" FromRole="Company" />
@@ -9092,6 +9784,7 @@
         <NavigationProperty Name="AgencyRecruitingUniversities" Relationship="NAV.Company_AgencyRecruitingUniversities" ToRole="AgencyRecruitingUniversities" FromRole="Company" />
         <NavigationProperty Name="AgencyStaffProfile" Relationship="NAV.Company_AgencyStaffProfile" ToRole="AgencyStaffProfile" FromRole="Company" />
         <NavigationProperty Name="allstudentsenrolled" Relationship="NAV.Company_allstudentsenrolled" ToRole="allstudentsenrolled" FromRole="Company" />
+        <NavigationProperty Name="AppealReason" Relationship="NAV.Company_AppealReason" ToRole="AppealReason" FromRole="Company" />
         <NavigationProperty Name="Appeals" Relationship="NAV.Company_Appeals" ToRole="Appeals" FromRole="Company" />
         <NavigationProperty Name="ApplicantProfile" Relationship="NAV.Company_ApplicantProfile" ToRole="ApplicantProfile" FromRole="Company" />
         <NavigationProperty Name="ApplicationDeclaration" Relationship="NAV.Company_ApplicationDeclaration" ToRole="ApplicationDeclaration" FromRole="Company" />
@@ -9135,6 +9828,14 @@
         <NavigationProperty Name="campuses" Relationship="NAV.Company_campuses" ToRole="campuses" FromRole="Company" />
         <NavigationProperty Name="Casuals" Relationship="NAV.Company_Casuals" ToRole="Casuals" FromRole="Company" />
         <NavigationProperty Name="ClassificationofDegrees" Relationship="NAV.Company_ClassificationofDegrees" ToRole="ClassificationofDegrees" FromRole="Company" />
+        <NavigationProperty Name="collaborationCurriculum" Relationship="NAV.Company_collaborationCurriculum" ToRole="collaborationCurriculum" FromRole="Company" />
+        <NavigationProperty Name="collaborationLicenseEntries" Relationship="NAV.Company_collaborationLicenseEntries" ToRole="collaborationLicenseEntries" FromRole="Company" />
+        <NavigationProperty Name="CollaborationResources" Relationship="NAV.Company_CollaborationResources" ToRole="CollaborationResources" FromRole="Company" />
+        <NavigationProperty Name="CollaborationResourcesList" Relationship="NAV.Company_CollaborationResourcesList" ToRole="CollaborationResourcesList" FromRole="Company" />
+        <NavigationProperty Name="CollaborationSiteLines" Relationship="NAV.Company_CollaborationSiteLines" ToRole="CollaborationSiteLines" FromRole="Company" />
+        <NavigationProperty Name="collabResourceAllocation" Relationship="NAV.Company_collabResourceAllocation" ToRole="collabResourceAllocation" FromRole="Company" />
+        <NavigationProperty Name="CollabResourceAllocation" Relationship="NAV.Company_CollabResourceAllocation" ToRole="CollabResourceAllocation" FromRole="Company" />
+        <NavigationProperty Name="collabSiteSubComp" Relationship="NAV.Company_collabSiteSubComp" ToRole="collabSiteSubComp" FromRole="Company" />
         <NavigationProperty Name="CompanyInformation" Relationship="NAV.Company_CompanyInformation" ToRole="CompanyInformation" FromRole="Company" />
         <NavigationProperty Name="CompanyPositions" Relationship="NAV.Company_CompanyPositions" ToRole="CompanyPositions" FromRole="Company" />
         <NavigationProperty Name="companySizes" Relationship="NAV.Company_companySizes" ToRole="companySizes" FromRole="Company" />
@@ -9255,6 +9956,8 @@
         <NavigationProperty Name="LibraryServices" Relationship="NAV.Company_LibraryServices" ToRole="LibraryServices" FromRole="Company" />
         <NavigationProperty Name="LicenceApplicationHeader" Relationship="NAV.Company_LicenceApplicationHeader" ToRole="LicenceApplicationHeader" FromRole="Company" />
         <NavigationProperty Name="LicenceType" Relationship="NAV.Company_LicenceType" ToRole="LicenceType" FromRole="Company" />
+        <NavigationProperty Name="LicensingEntries" Relationship="NAV.Company_LicensingEntries" ToRole="LicensingEntries" FromRole="Company" />
+        <NavigationProperty Name="LicensingSetup" Relationship="NAV.Company_LicensingSetup" ToRole="LicensingSetup" FromRole="Company" />
         <NavigationProperty Name="Locations" Relationship="NAV.Company_Locations" ToRole="Locations" FromRole="Company" />
         <NavigationProperty Name="MachiraEmployees" Relationship="NAV.Company_MachiraEmployees" ToRole="MachiraEmployees" FromRole="Company" />
         <NavigationProperty Name="MyHeldeskRequests" Relationship="NAV.Company_MyHeldeskRequests" ToRole="MyHeldeskRequests" FromRole="Company" />
@@ -9296,6 +9999,7 @@
         <NavigationProperty Name="ProgramGrading" Relationship="NAV.Company_ProgramGrading" ToRole="ProgramGrading" FromRole="Company" />
         <NavigationProperty Name="ProgrammeAccreditation" Relationship="NAV.Company_ProgrammeAccreditation" ToRole="ProgrammeAccreditation" FromRole="Company" />
         <NavigationProperty Name="ProgrammeCourseMatrix" Relationship="NAV.Company_ProgrammeCourseMatrix" ToRole="ProgrammeCourseMatrix" FromRole="Company" />
+        <NavigationProperty Name="ProgrammeEvaluationHeader" Relationship="NAV.Company_ProgrammeEvaluationHeader" ToRole="ProgrammeEvaluationHeader" FromRole="Company" />
         <NavigationProperty Name="ProgrammeObjective" Relationship="NAV.Company_ProgrammeObjective" ToRole="ProgrammeObjective" FromRole="Company" />
         <NavigationProperty Name="Programmes" Relationship="NAV.Company_Programmes" ToRole="Programmes" FromRole="Company" />
         <NavigationProperty Name="Programmes_Domains" Relationship="NAV.Company_Programmes_Domains" ToRole="Programmes_Domains" FromRole="Company" />
@@ -9359,6 +10063,8 @@
         <NavigationProperty Name="SARSectionsSetup" Relationship="NAV.Company_SARSectionsSetup" ToRole="SARSectionsSetup" FromRole="Company" />
         <NavigationProperty Name="SatisfactionsWeaknessStrengths" Relationship="NAV.Company_SatisfactionsWeaknessStrengths" ToRole="SatisfactionsWeaknessStrengths" FromRole="Company" />
         <NavigationProperty Name="ServiceItems" Relationship="NAV.Company_ServiceItems" ToRole="ServiceItems" FromRole="Company" />
+        <NavigationProperty Name="Sitecomponents" Relationship="NAV.Company_Sitecomponents" ToRole="Sitecomponents" FromRole="Company" />
+        <NavigationProperty Name="SiteInspectionComments" Relationship="NAV.Company_SiteInspectionComments" ToRole="SiteInspectionComments" FromRole="Company" />
         <NavigationProperty Name="SourcesofIncome" Relationship="NAV.Company_SourcesofIncome" ToRole="SourcesofIncome" FromRole="Company" />
         <NavigationProperty Name="SpecialGroupCategories" Relationship="NAV.Company_SpecialGroupCategories" ToRole="SpecialGroupCategories" FromRole="Company" />
         <NavigationProperty Name="SpecializationAreas" Relationship="NAV.Company_SpecializationAreas" ToRole="SpecializationAreas" FromRole="Company" />
@@ -9380,6 +10086,7 @@
         <NavigationProperty Name="StudentsEvalWeaknessStrengths" Relationship="NAV.Company_StudentsEvalWeaknessStrengths" ToRole="StudentsEvalWeaknessStrengths" FromRole="Company" />
         <NavigationProperty Name="StudentsResearch" Relationship="NAV.Company_StudentsResearch" ToRole="StudentsResearch" FromRole="Company" />
         <NavigationProperty Name="StudentsSuppport" Relationship="NAV.Company_StudentsSuppport" ToRole="StudentsSuppport" FromRole="Company" />
+        <NavigationProperty Name="StudentStatistics" Relationship="NAV.Company_StudentStatistics" ToRole="StudentStatistics" FromRole="Company" />
         <NavigationProperty Name="StudentSupportWeaknessStrength" Relationship="NAV.Company_StudentSupportWeaknessStrength" ToRole="StudentSupportWeaknessStrength" FromRole="Company" />
         <NavigationProperty Name="SubDomains" Relationship="NAV.Company_SubDomains" ToRole="SubDomains" FromRole="Company" />
         <NavigationProperty Name="SurfaceTypes" Relationship="NAV.Company_SurfaceTypes" ToRole="SurfaceTypes" FromRole="Company" />
@@ -9431,6 +10138,7 @@
         <NavigationProperty Name="VendorStaffQualification" Relationship="NAV.Company_VendorStaffQualification" ToRole="VendorStaffQualification" FromRole="Company" />
         <NavigationProperty Name="VendorStatetement" Relationship="NAV.Company_VendorStatetement" ToRole="VendorStatetement" FromRole="Company" />
         <NavigationProperty Name="VendorStatetement1" Relationship="NAV.Company_VendorStatetement1" ToRole="VendorStatetement1" FromRole="Company" />
+        <NavigationProperty Name="VoteHeads" Relationship="NAV.Company_VoteHeads" ToRole="VoteHeads" FromRole="Company" />
         <NavigationProperty Name="Waste_Management" Relationship="NAV.Company_Waste_Management" ToRole="Waste_Management" FromRole="Company" />
         <NavigationProperty Name="Waste_Management_Category" Relationship="NAV.Company_Waste_Management_Category" ToRole="Waste_Management_Category" FromRole="Company" />
         <NavigationProperty Name="WorkConditions" Relationship="NAV.Company_WorkConditions" ToRole="WorkConditions" FromRole="Company" />
@@ -9531,9 +10239,25 @@
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
         <End Type="NAV.Agency_ActivitiesPage" Role="Agency_ActivitiesPage" Multiplicity="*" />
       </Association>
+      <Association Name="Company_Agency_Sub_Questions">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.Agency_Sub_Questions" Role="Agency_Sub_Questions" Multiplicity="*" />
+      </Association>
       <Association Name="Company_AgencyQuestionList">
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
         <End Type="NAV.AgencyQuestionList" Role="AgencyQuestionList" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_ApplicationPayments">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.ApplicationPayments" Role="ApplicationPayments" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_Collaboration_Programmes">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.Collaboration_Programmes" Role="Collaboration_Programmes" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_CollaborationFeeSetup">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.CollaborationFeeSetup" Role="CollaborationFeeSetup" Multiplicity="*" />
       </Association>
       <Association Name="Company_Countries">
         <End Type="NAV.Countries" Role="Countries" Multiplicity="*" />
@@ -9583,8 +10307,16 @@
         <End Type="NAV.ProcurementPlanEntry" Role="ProcurementPlanEntry" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
+      <Association Name="Company_ProgramDomain">
+        <End Type="NAV.ProgramDomain" Role="ProgramDomain" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
       <Association Name="Company_ResourceList">
         <End Type="NAV.ResourceList" Role="ResourceList" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_sourceOfFunds">
+        <End Type="NAV.sourceOfFunds" Role="sourceOfFunds" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_academicenrolldraft">
@@ -9651,6 +10383,10 @@
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
         <End Type="NAV.AgencyApplicationFacilities" Role="AgencyApplicationFacilities" Multiplicity="*" />
       </Association>
+      <Association Name="Company_AgencyAttachedDocuments">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.AgencyAttachedDocuments" Role="AgencyAttachedDocuments" Multiplicity="*" />
+      </Association>
       <Association Name="Company_AgencyComplianceSetup">
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
         <End Type="NAV.AgencyComplianceSetup" Role="AgencyComplianceSetup" Multiplicity="*" />
@@ -9690,6 +10426,10 @@
       <Association Name="Company_allstudentsenrolled">
         <End Type="NAV.allstudentsenrolled" Role="allstudentsenrolled" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_AppealReason">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.AppealReason" Role="AppealReason" Multiplicity="*" />
       </Association>
       <Association Name="Company_Appeals">
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
@@ -9862,6 +10602,38 @@
       <Association Name="Company_ClassificationofDegrees">
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
         <End Type="NAV.ClassificationofDegrees" Role="ClassificationofDegrees" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_collaborationCurriculum">
+        <End Type="NAV.collaborationCurriculum" Role="collaborationCurriculum" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_collaborationLicenseEntries">
+        <End Type="NAV.collaborationLicenseEntries" Role="collaborationLicenseEntries" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_CollaborationResources">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.CollaborationResources" Role="CollaborationResources" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_CollaborationResourcesList">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.CollaborationResourcesList" Role="CollaborationResourcesList" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_CollaborationSiteLines">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.CollaborationSiteLines" Role="CollaborationSiteLines" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_collabResourceAllocation">
+        <End Type="NAV.collabResourceAllocation" Role="collabResourceAllocation" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_CollabResourceAllocation">
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+        <End Type="NAV.CollabResourceAllocation" Role="CollabResourceAllocation" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_collabSiteSubComp">
+        <End Type="NAV.collabSiteSubComp" Role="collabSiteSubComp" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_CompanyInformation">
         <End Type="NAV.CompanyInformation" Role="CompanyInformation" Multiplicity="*" />
@@ -10343,6 +11115,14 @@
         <End Type="NAV.LicenceType" Role="LicenceType" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
+      <Association Name="Company_LicensingEntries">
+        <End Type="NAV.LicensingEntries" Role="LicensingEntries" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_LicensingSetup">
+        <End Type="NAV.LicensingSetup" Role="LicensingSetup" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
       <Association Name="Company_Locations">
         <End Type="NAV.Locations" Role="Locations" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
@@ -10505,6 +11285,10 @@
       </Association>
       <Association Name="Company_ProgrammeCourseMatrix">
         <End Type="NAV.ProgrammeCourseMatrix" Role="ProgrammeCourseMatrix" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_ProgrammeEvaluationHeader">
+        <End Type="NAV.ProgrammeEvaluationHeader" Role="ProgrammeEvaluationHeader" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_ProgrammeObjective">
@@ -10759,6 +11543,14 @@
         <End Type="NAV.ServiceItems" Role="ServiceItems" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
+      <Association Name="Company_Sitecomponents">
+        <End Type="NAV.Sitecomponents" Role="Sitecomponents" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_SiteInspectionComments">
+        <End Type="NAV.SiteInspectionComments" Role="SiteInspectionComments" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
       <Association Name="Company_SourcesofIncome">
         <End Type="NAV.SourcesofIncome" Role="SourcesofIncome" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
@@ -10841,6 +11633,10 @@
       </Association>
       <Association Name="Company_StudentsSuppport">
         <End Type="NAV.StudentsSuppport" Role="StudentsSuppport" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
+      <Association Name="Company_StudentStatistics">
+        <End Type="NAV.StudentStatistics" Role="StudentStatistics" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
       <Association Name="Company_StudentSupportWeaknessStrength">
@@ -11047,6 +11843,10 @@
         <End Type="NAV.VendorStatetement1" Role="VendorStatetement1" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
       </Association>
+      <Association Name="Company_VoteHeads">
+        <End Type="NAV.VoteHeads" Role="VoteHeads" Multiplicity="*" />
+        <End Type="NAV.Company" Role="Company" Multiplicity="*" />
+      </Association>
       <Association Name="Company_Waste_Management">
         <End Type="NAV.Waste_Management" Role="Waste_Management" Multiplicity="*" />
         <End Type="NAV.Company" Role="Company" Multiplicity="*" />
@@ -11190,7 +11990,11 @@
       <EntityContainer Name="NAV" m:IsDefaultEntityContainer="true">
         <EntitySet Name="AccreditationCategories" EntityType="NAV.AccreditationCategories" />
         <EntitySet Name="Agency_ActivitiesPage" EntityType="NAV.Agency_ActivitiesPage" />
+        <EntitySet Name="Agency_Sub_Questions" EntityType="NAV.Agency_Sub_Questions" />
         <EntitySet Name="AgencyQuestionList" EntityType="NAV.AgencyQuestionList" />
+        <EntitySet Name="ApplicationPayments" EntityType="NAV.ApplicationPayments" />
+        <EntitySet Name="Collaboration_Programmes" EntityType="NAV.Collaboration_Programmes" />
+        <EntitySet Name="CollaborationFeeSetup" EntityType="NAV.CollaborationFeeSetup" />
         <EntitySet Name="Countries" EntityType="NAV.Countries" />
         <EntitySet Name="CSPStrategies" EntityType="NAV.CSPStrategies" />
         <EntitySet Name="CurrentProcurementPlan" EntityType="NAV.CurrentProcurementPlan" />
@@ -11203,7 +12007,9 @@
         <EntitySet Name="LicenceTypeList" EntityType="NAV.LicenceTypeList" />
         <EntitySet Name="PostCodes" EntityType="NAV.PostCodes" />
         <EntitySet Name="ProcurementPlanEntry" EntityType="NAV.ProcurementPlanEntry" />
+        <EntitySet Name="ProgramDomain" EntityType="NAV.ProgramDomain" />
         <EntitySet Name="ResourceList" EntityType="NAV.ResourceList" />
+        <EntitySet Name="sourceOfFunds" EntityType="NAV.sourceOfFunds" />
         <EntitySet Name="academicenrolldraft" EntityType="NAV.academicenrolldraft" />
         <EntitySet Name="AcademicLevels" EntityType="NAV.AcademicLevels" />
         <EntitySet Name="AcademicProgrammeLeader" EntityType="NAV.AcademicProgrammeLeader" />
@@ -11220,6 +12026,7 @@
         <EntitySet Name="AgencyActivities" EntityType="NAV.AgencyActivities" />
         <EntitySet Name="AgencyActivitiesSetup" EntityType="NAV.AgencyActivitiesSetup" />
         <EntitySet Name="AgencyApplicationFacilities" EntityType="NAV.AgencyApplicationFacilities" />
+        <EntitySet Name="AgencyAttachedDocuments" EntityType="NAV.AgencyAttachedDocuments" />
         <EntitySet Name="AgencyComplianceSetup" EntityType="NAV.AgencyComplianceSetup" />
         <EntitySet Name="AgencyDocuments" EntityType="NAV.AgencyDocuments" />
         <EntitySet Name="AgencyFacilitiesCategories" EntityType="NAV.AgencyFacilitiesCategories" />
@@ -11230,6 +12037,7 @@
         <EntitySet Name="AgencyRecruitingUniversities" EntityType="NAV.AgencyRecruitingUniversities" />
         <EntitySet Name="AgencyStaffProfile" EntityType="NAV.AgencyStaffProfile" />
         <EntitySet Name="allstudentsenrolled" EntityType="NAV.allstudentsenrolled" />
+        <EntitySet Name="AppealReason" EntityType="NAV.AppealReason" />
         <EntitySet Name="Appeals" EntityType="NAV.Appeals" />
         <EntitySet Name="ApplicantProfile" EntityType="NAV.ApplicantProfile" />
         <EntitySet Name="ApplicationDeclaration" EntityType="NAV.ApplicationDeclaration" />
@@ -11273,6 +12081,14 @@
         <EntitySet Name="campuses" EntityType="NAV.campuses" />
         <EntitySet Name="Casuals" EntityType="NAV.Casuals" />
         <EntitySet Name="ClassificationofDegrees" EntityType="NAV.ClassificationofDegrees" />
+        <EntitySet Name="collaborationCurriculum" EntityType="NAV.collaborationCurriculum" />
+        <EntitySet Name="collaborationLicenseEntries" EntityType="NAV.collaborationLicenseEntries" />
+        <EntitySet Name="CollaborationResources" EntityType="NAV.CollaborationResources" />
+        <EntitySet Name="CollaborationResourcesList" EntityType="NAV.CollaborationResourcesList" />
+        <EntitySet Name="CollaborationSiteLines" EntityType="NAV.CollaborationSiteLines" />
+        <EntitySet Name="collabResourceAllocation" EntityType="NAV.collabResourceAllocation" />
+        <EntitySet Name="CollabResourceAllocation" EntityType="NAV.CollabResourceAllocation" />
+        <EntitySet Name="collabSiteSubComp" EntityType="NAV.collabSiteSubComp" />
         <EntitySet Name="CompanyInformation" EntityType="NAV.CompanyInformation" />
         <EntitySet Name="CompanyPositions" EntityType="NAV.CompanyPositions" />
         <EntitySet Name="companySizes" EntityType="NAV.companySizes" />
@@ -11393,6 +12209,8 @@
         <EntitySet Name="LibraryServices" EntityType="NAV.LibraryServices" />
         <EntitySet Name="LicenceApplicationHeader" EntityType="NAV.LicenceApplicationHeader" />
         <EntitySet Name="LicenceType" EntityType="NAV.LicenceType" />
+        <EntitySet Name="LicensingEntries" EntityType="NAV.LicensingEntries" />
+        <EntitySet Name="LicensingSetup" EntityType="NAV.LicensingSetup" />
         <EntitySet Name="Locations" EntityType="NAV.Locations" />
         <EntitySet Name="MachiraEmployees" EntityType="NAV.MachiraEmployees" />
         <EntitySet Name="MyHeldeskRequests" EntityType="NAV.MyHeldeskRequests" />
@@ -11434,6 +12252,7 @@
         <EntitySet Name="ProgramGrading" EntityType="NAV.ProgramGrading" />
         <EntitySet Name="ProgrammeAccreditation" EntityType="NAV.ProgrammeAccreditation" />
         <EntitySet Name="ProgrammeCourseMatrix" EntityType="NAV.ProgrammeCourseMatrix" />
+        <EntitySet Name="ProgrammeEvaluationHeader" EntityType="NAV.ProgrammeEvaluationHeader" />
         <EntitySet Name="ProgrammeObjective" EntityType="NAV.ProgrammeObjective" />
         <EntitySet Name="Programmes" EntityType="NAV.Programmes" />
         <EntitySet Name="Programmes_Domains" EntityType="NAV.Programmes_Domains" />
@@ -11497,6 +12316,8 @@
         <EntitySet Name="SARSectionsSetup" EntityType="NAV.SARSectionsSetup" />
         <EntitySet Name="SatisfactionsWeaknessStrengths" EntityType="NAV.SatisfactionsWeaknessStrengths" />
         <EntitySet Name="ServiceItems" EntityType="NAV.ServiceItems" />
+        <EntitySet Name="Sitecomponents" EntityType="NAV.Sitecomponents" />
+        <EntitySet Name="SiteInspectionComments" EntityType="NAV.SiteInspectionComments" />
         <EntitySet Name="SourcesofIncome" EntityType="NAV.SourcesofIncome" />
         <EntitySet Name="SpecialGroupCategories" EntityType="NAV.SpecialGroupCategories" />
         <EntitySet Name="SpecializationAreas" EntityType="NAV.SpecializationAreas" />
@@ -11518,6 +12339,7 @@
         <EntitySet Name="StudentsEvalWeaknessStrengths" EntityType="NAV.StudentsEvalWeaknessStrengths" />
         <EntitySet Name="StudentsResearch" EntityType="NAV.StudentsResearch" />
         <EntitySet Name="StudentsSuppport" EntityType="NAV.StudentsSuppport" />
+        <EntitySet Name="StudentStatistics" EntityType="NAV.StudentStatistics" />
         <EntitySet Name="StudentSupportWeaknessStrength" EntityType="NAV.StudentSupportWeaknessStrength" />
         <EntitySet Name="SubDomains" EntityType="NAV.SubDomains" />
         <EntitySet Name="SurfaceTypes" EntityType="NAV.SurfaceTypes" />
@@ -11569,6 +12391,7 @@
         <EntitySet Name="VendorStaffQualification" EntityType="NAV.VendorStaffQualification" />
         <EntitySet Name="VendorStatetement" EntityType="NAV.VendorStatetement" />
         <EntitySet Name="VendorStatetement1" EntityType="NAV.VendorStatetement1" />
+        <EntitySet Name="VoteHeads" EntityType="NAV.VoteHeads" />
         <EntitySet Name="Waste_Management" EntityType="NAV.Waste_Management" />
         <EntitySet Name="Waste_Management_Category" EntityType="NAV.Waste_Management_Category" />
         <EntitySet Name="WorkConditions" EntityType="NAV.WorkConditions" />
@@ -11669,9 +12492,25 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="Agency_ActivitiesPage" EntitySet="Agency_ActivitiesPage" />
         </AssociationSet>
+        <AssociationSet Name="Company_Agency_Sub_Questions_Agency_Sub_Questions" Association="NAV.Company_Agency_Sub_Questions">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="Agency_Sub_Questions" EntitySet="Agency_Sub_Questions" />
+        </AssociationSet>
         <AssociationSet Name="Company_AgencyQuestionList_AgencyQuestionList" Association="NAV.Company_AgencyQuestionList">
           <End Role="Company" EntitySet="Company" />
           <End Role="AgencyQuestionList" EntitySet="AgencyQuestionList" />
+        </AssociationSet>
+        <AssociationSet Name="Company_ApplicationPayments_ApplicationPayments" Association="NAV.Company_ApplicationPayments">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="ApplicationPayments" EntitySet="ApplicationPayments" />
+        </AssociationSet>
+        <AssociationSet Name="Company_Collaboration_Programmes_Collaboration_Programmes" Association="NAV.Company_Collaboration_Programmes">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="Collaboration_Programmes" EntitySet="Collaboration_Programmes" />
+        </AssociationSet>
+        <AssociationSet Name="Company_CollaborationFeeSetup_CollaborationFeeSetup" Association="NAV.Company_CollaborationFeeSetup">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="CollaborationFeeSetup" EntitySet="CollaborationFeeSetup" />
         </AssociationSet>
         <AssociationSet Name="Company_Countries_Countries" Association="NAV.Company_Countries">
           <End Role="Company" EntitySet="Company" />
@@ -11721,9 +12560,17 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="ProcurementPlanEntry" EntitySet="ProcurementPlanEntry" />
         </AssociationSet>
+        <AssociationSet Name="Company_ProgramDomain_ProgramDomain" Association="NAV.Company_ProgramDomain">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="ProgramDomain" EntitySet="ProgramDomain" />
+        </AssociationSet>
         <AssociationSet Name="Company_ResourceList_ResourceList" Association="NAV.Company_ResourceList">
           <End Role="Company" EntitySet="Company" />
           <End Role="ResourceList" EntitySet="ResourceList" />
+        </AssociationSet>
+        <AssociationSet Name="Company_sourceOfFunds_sourceOfFunds" Association="NAV.Company_sourceOfFunds">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="sourceOfFunds" EntitySet="sourceOfFunds" />
         </AssociationSet>
         <AssociationSet Name="Company_academicenrolldraft_academicenrolldraft" Association="NAV.Company_academicenrolldraft">
           <End Role="Company" EntitySet="Company" />
@@ -11789,6 +12636,10 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="AgencyApplicationFacilities" EntitySet="AgencyApplicationFacilities" />
         </AssociationSet>
+        <AssociationSet Name="Company_AgencyAttachedDocuments_AgencyAttachedDocuments" Association="NAV.Company_AgencyAttachedDocuments">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="AgencyAttachedDocuments" EntitySet="AgencyAttachedDocuments" />
+        </AssociationSet>
         <AssociationSet Name="Company_AgencyComplianceSetup_AgencyComplianceSetup" Association="NAV.Company_AgencyComplianceSetup">
           <End Role="Company" EntitySet="Company" />
           <End Role="AgencyComplianceSetup" EntitySet="AgencyComplianceSetup" />
@@ -11828,6 +12679,10 @@
         <AssociationSet Name="Company_allstudentsenrolled_allstudentsenrolled" Association="NAV.Company_allstudentsenrolled">
           <End Role="Company" EntitySet="Company" />
           <End Role="allstudentsenrolled" EntitySet="allstudentsenrolled" />
+        </AssociationSet>
+        <AssociationSet Name="Company_AppealReason_AppealReason" Association="NAV.Company_AppealReason">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="AppealReason" EntitySet="AppealReason" />
         </AssociationSet>
         <AssociationSet Name="Company_Appeals_Appeals" Association="NAV.Company_Appeals">
           <End Role="Company" EntitySet="Company" />
@@ -12000,6 +12855,38 @@
         <AssociationSet Name="Company_ClassificationofDegrees_ClassificationofDegrees" Association="NAV.Company_ClassificationofDegrees">
           <End Role="Company" EntitySet="Company" />
           <End Role="ClassificationofDegrees" EntitySet="ClassificationofDegrees" />
+        </AssociationSet>
+        <AssociationSet Name="Company_collaborationCurriculum_collaborationCurriculum" Association="NAV.Company_collaborationCurriculum">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="collaborationCurriculum" EntitySet="collaborationCurriculum" />
+        </AssociationSet>
+        <AssociationSet Name="Company_collaborationLicenseEntries_collaborationLicenseEntries" Association="NAV.Company_collaborationLicenseEntries">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="collaborationLicenseEntries" EntitySet="collaborationLicenseEntries" />
+        </AssociationSet>
+        <AssociationSet Name="Company_CollaborationResources_CollaborationResources" Association="NAV.Company_CollaborationResources">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="CollaborationResources" EntitySet="CollaborationResources" />
+        </AssociationSet>
+        <AssociationSet Name="Company_CollaborationResourcesList_CollaborationResourcesList" Association="NAV.Company_CollaborationResourcesList">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="CollaborationResourcesList" EntitySet="CollaborationResourcesList" />
+        </AssociationSet>
+        <AssociationSet Name="Company_CollaborationSiteLines_CollaborationSiteLines" Association="NAV.Company_CollaborationSiteLines">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="CollaborationSiteLines" EntitySet="CollaborationSiteLines" />
+        </AssociationSet>
+        <AssociationSet Name="Company_collabResourceAllocation_collabResourceAllocation" Association="NAV.Company_collabResourceAllocation">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="collabResourceAllocation" EntitySet="collabResourceAllocation" />
+        </AssociationSet>
+        <AssociationSet Name="Company_CollabResourceAllocation_CollabResourceAllocation" Association="NAV.Company_CollabResourceAllocation">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="CollabResourceAllocation" EntitySet="CollabResourceAllocation" />
+        </AssociationSet>
+        <AssociationSet Name="Company_collabSiteSubComp_collabSiteSubComp" Association="NAV.Company_collabSiteSubComp">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="collabSiteSubComp" EntitySet="collabSiteSubComp" />
         </AssociationSet>
         <AssociationSet Name="Company_CompanyInformation_CompanyInformation" Association="NAV.Company_CompanyInformation">
           <End Role="Company" EntitySet="Company" />
@@ -12481,6 +13368,14 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="LicenceType" EntitySet="LicenceType" />
         </AssociationSet>
+        <AssociationSet Name="Company_LicensingEntries_LicensingEntries" Association="NAV.Company_LicensingEntries">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="LicensingEntries" EntitySet="LicensingEntries" />
+        </AssociationSet>
+        <AssociationSet Name="Company_LicensingSetup_LicensingSetup" Association="NAV.Company_LicensingSetup">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="LicensingSetup" EntitySet="LicensingSetup" />
+        </AssociationSet>
         <AssociationSet Name="Company_Locations_Locations" Association="NAV.Company_Locations">
           <End Role="Company" EntitySet="Company" />
           <End Role="Locations" EntitySet="Locations" />
@@ -12644,6 +13539,10 @@
         <AssociationSet Name="Company_ProgrammeCourseMatrix_ProgrammeCourseMatrix" Association="NAV.Company_ProgrammeCourseMatrix">
           <End Role="Company" EntitySet="Company" />
           <End Role="ProgrammeCourseMatrix" EntitySet="ProgrammeCourseMatrix" />
+        </AssociationSet>
+        <AssociationSet Name="Company_ProgrammeEvaluationHeader_ProgrammeEvaluationHeader" Association="NAV.Company_ProgrammeEvaluationHeader">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="ProgrammeEvaluationHeader" EntitySet="ProgrammeEvaluationHeader" />
         </AssociationSet>
         <AssociationSet Name="Company_ProgrammeObjective_ProgrammeObjective" Association="NAV.Company_ProgrammeObjective">
           <End Role="Company" EntitySet="Company" />
@@ -12897,6 +13796,14 @@
           <End Role="Company" EntitySet="Company" />
           <End Role="ServiceItems" EntitySet="ServiceItems" />
         </AssociationSet>
+        <AssociationSet Name="Company_Sitecomponents_Sitecomponents" Association="NAV.Company_Sitecomponents">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="Sitecomponents" EntitySet="Sitecomponents" />
+        </AssociationSet>
+        <AssociationSet Name="Company_SiteInspectionComments_SiteInspectionComments" Association="NAV.Company_SiteInspectionComments">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="SiteInspectionComments" EntitySet="SiteInspectionComments" />
+        </AssociationSet>
         <AssociationSet Name="Company_SourcesofIncome_SourcesofIncome" Association="NAV.Company_SourcesofIncome">
           <End Role="Company" EntitySet="Company" />
           <End Role="SourcesofIncome" EntitySet="SourcesofIncome" />
@@ -12980,6 +13887,10 @@
         <AssociationSet Name="Company_StudentsSuppport_StudentsSuppport" Association="NAV.Company_StudentsSuppport">
           <End Role="Company" EntitySet="Company" />
           <End Role="StudentsSuppport" EntitySet="StudentsSuppport" />
+        </AssociationSet>
+        <AssociationSet Name="Company_StudentStatistics_StudentStatistics" Association="NAV.Company_StudentStatistics">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="StudentStatistics" EntitySet="StudentStatistics" />
         </AssociationSet>
         <AssociationSet Name="Company_StudentSupportWeaknessStrength_StudentSupportWeaknessStrength" Association="NAV.Company_StudentSupportWeaknessStrength">
           <End Role="Company" EntitySet="Company" />
@@ -13184,6 +14095,10 @@
         <AssociationSet Name="Company_VendorStatetement1_VendorStatetement1" Association="NAV.Company_VendorStatetement1">
           <End Role="Company" EntitySet="Company" />
           <End Role="VendorStatetement1" EntitySet="VendorStatetement1" />
+        </AssociationSet>
+        <AssociationSet Name="Company_VoteHeads_VoteHeads" Association="NAV.Company_VoteHeads">
+          <End Role="Company" EntitySet="Company" />
+          <End Role="VoteHeads" EntitySet="VoteHeads" />
         </AssociationSet>
         <AssociationSet Name="Company_Waste_Management_Waste_Management" Association="NAV.Company_Waste_Management">
           <End Role="Company" EntitySet="Company" />

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -15,24 +17,38 @@ namespace HRPortal
             if (!IsPostBack)
             {
 
-                
+
 
                 var nav = new Config().ReturnNav();
-               
 
-                var postCodes = nav.postcodes;
-                postalAddress.DataSource = postCodes;
-                postalAddress.DataValueField = "Code";
-                postalAddress.DataTextField = "City";
+                List<PostCode> payperiodz = new List<PostCode>();
+                var paYperiods = nav.postcodes;
+                foreach (var payPeriod in paYperiods)
+                {
+                    PostCode list1 = new PostCode();
+                    list1.city = payPeriod.Code + " " +payPeriod.City;
+                    list1.code = payPeriod.Code;
+                    payperiodz.Add(list1);
+
+                }
+                postalAddress.DataSource = payperiodz;
+                postalAddress.DataValueField = "code";
+                postalAddress.DataTextField = "city";
                 postalAddress.DataBind();
                 postalAddress.Items.Insert(0, new ListItem("--select Postal Address--", ""));
 
 
-
+                
+                var countries = nav.Countries.ToList();
+                foreignCountry.DataSource = countries;
+                foreignCountry.DataTextField = "Name";
+                foreignCountry.DataValueField = "Code";
+                foreignCountry.DataBind();
+                foreignCountry.Items.Insert(0, new ListItem("--select--", ""));
             }
         }
         [System.Web.Services.WebMethod(EnableSession = true)]
-        public static string RequesttoCreateAccount(string tagencyName, string tresidenctialAddress, string tpostalAddress, string ttelephoneNumber, string talternativePhoneNumber, string twhatsAppNo, string temailAddress, string twebsite)
+        public static string RequesttoCreateAccount(string tagencyName, string tresidenctialAddress, string tpostalAddress, string ttelephoneNumber, string talternativePhoneNumber, string twhatsAppNo, string temailAddress, string twebsite, string tcontactName, string tCity, string tpostaLAddressPoBox,string tcontactPhoneNo, string tcontactEmailAdd)
         {
             var results = (dynamic)null;
             try
@@ -91,7 +107,7 @@ namespace HRPortal
 
                 string AuthenticationEmail = temailAddress.Trim().ToLower();
 
-            
+
 
                 Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(AuthenticationEmail);
@@ -100,7 +116,7 @@ namespace HRPortal
                 {
 
 
-                    string status = Config.ObjNav.FnRegistration(firstName, middliN, lastName, ttelephoneNumber, tresidenctialAddress, tpostalAddress, talternativePhoneNumber, twhatsAppNo, twebsite, AuthenticationEmail);
+                    string status = Config.ObjNav.FnRegistration(tagencyName, ttelephoneNumber, tresidenctialAddress, tpostalAddress, talternativePhoneNumber, twebsite, temailAddress, tcontactName, tCity, tpostaLAddressPoBox, tcontactPhoneNo, tcontactEmailAdd);
                     string[] info = status.Split('*');
                     if (info[0] == "success")
                     {
@@ -126,16 +142,34 @@ namespace HRPortal
             return results;
         }
 
-        protected void agencyType_SelectedIndexChanged(object sender, EventArgs e)
+        protected void postalAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String kenyaCountry = DropDownList1.SelectedValue.Trim();
-            if (kenyaCountry == "KE")
+            var nav = new Config().ReturnNav();
+            var cities = nav.postcodes.Where(r => r.Code == postalAddress.SelectedValue);
+            foreach (var myCity in cities)
             {
-                LocalAddress.Visible = true;
+                city.Text = myCity.City;
+
+            }
+        }
+
+        
+
+        protected void applicantType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (applicantType.SelectedValue == "1")
+            {
+                AppCountry.Visible = false;
+                local.Visible = true;
+            }
+            else if(applicantType.SelectedValue == "2"){
+                AppCountry.Visible = true;
+                local.Visible = false;
             }
             else
             {
-                LocalAddress.Visible = false;
+                AppCountry.Visible = false;
+                local.Visible = false;
             }
         }
     }

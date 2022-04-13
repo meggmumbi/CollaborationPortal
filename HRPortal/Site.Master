@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CUE - LICENSING</title>
+    <title>CUE - COLLABORATION</title>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -70,7 +70,7 @@
                         <span class="sr-only">Toggle navigation</span>
                     </a>
                     <div class="page-title-box" style="margin-left:30px">
-                        <h4 style="color:white">WELCOME <b style="color:yellow"><%= Convert.ToString(Session["name"]).ToUpper() %></b> TO - LICENSING OF STUDENT RECRUITMENT AGENCIES PORTAL</h4>
+                        <h4 style="color:white">WELCOME <b style="color:yellow"><%= Convert.ToString(Session["name"]).ToUpper() %></b> - INSTITUTIONS COLLABORATION PORTAL</h4>
                     </div>
                 </nav>
             </header>
@@ -92,31 +92,27 @@
                                 <i class="fa fa-dashboard"></i><span>Dashboard</span>
                             </a>
                         </li>
+                    
                         <li class="active">
-                            <a href="MyProfile.aspx">
-                                <i class="fa fa-user"></i><span>My Profile</span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="https://www.cue.or.ke/index.php?option=com_phocadownload&view=category&id=16:standards-and-guidelines&Itemid=187">
+                            <a href="Home_Guidelines.aspx">
                                 <i class="fa fa-arrow-circle-right"></i><span>Standards and Guidelines</span>
                             </a>
                         </li>
                                <li class="active">
-                            <a href="Downloads/Automation_Requirements_Licensing_Student_Recruitment_Agencies_Nov2021v4.pdf">
+                            <a href="Downloads/collab.pdf">
                                 <i class="fa fa-download"></i><span>Download Portal User Manual</span>
                             </a>
                         </li>
-                        <li class="active">
+                         <li class="active">
                             <a href="Home_Payments.aspx">
-                                <i class="fa fa-money"></i><span>Payments</span>
+                                <i class="fa fa-sign-out"></i><span>Collaboration Fees</span>
                             </a>
                         </li>
-                        <!--SERVICES-->
+          
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-table"></i>
-                                <span>My Applications</span>
+                                <i class="fa fa-table,"></i>
+                                <span>Collaborations Applications</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -125,15 +121,45 @@
                                 <li><a href="NewApplication.aspx"><i class="fa fa-circle-o"></i>New Application</a></li>
                                 <li><a href="OpenApplications.aspx"><i class="fa fa-circle-o"></i>Draft Applications</a></li>
                                 <li><a href="ApprovedApplications.aspx"><i class="fa fa-circle-o"></i>Pending Payments</a></li>
-                                <li><a href="StatusOfApplication.aspx"><i class="fa fa-circle-o"></i>Status of Applications</a></li>  
-                                  <li><a href="Home_Payments.aspx"><i class="fa fa-circle-o"></i>Payment Options</a></li>                              
-                                <li><a href="ReSubmission.aspx"><i class="fa fa-circle-o"></i>Request For Re-Submission</a></li>
-                                <li><a href="ApplicationAppeal.aspx"><i class="fa fa-circle-o"></i>Application Appeals</a></li>
+                                <li><a href="StatusOfApplication.aspx"><i class="fa fa-circle-o"></i>Status of Applications</a></li>                                                        
+                                <li><a href="StaffUpload.aspx"><i class="fa fa-circle-o"></i>Staff Upload</a></li>
+                                <li><a href="TerminatedApplications.aspx"><i class="fa fa-circle-o"></i>Terminated Applications</a></li>
+                                
                             </ul>
                         </li>
+                                  <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-certificate"></i>
+                                <span>My Licenses</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">                       
+                                <li><a href="Certificate.aspx"><i class="fa fa-circle-o"></i>My Licenses</a></li>
+                                   <li><a href="OpenRenewalApplications.aspx"><i class="fa fa-circle-o"></i>Open Renewal Applications</a></li>
+
+                            </ul>
+                                  </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i>
+                                <span>Appeal Application</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="ClosedApplications.aspx"><i class="fa fa-circle-o"></i>Appeal Application</a></li>
+                                <li><a href="MyAppealApplications.aspx"><i class="fa fa-circle-o"></i>My Appeal Applications</a></li>
+
+                            </ul>
+                        </li>
+
+
                         <li class="active">
-                            <a href="Certificate.aspx">
-                                <i class="fa fa-certificate" aria-hidden="true"></i><span>My Licenses</span>
+                            <a href="ICTHelpDesk.aspx">
+                                <i class="fa fa-sign-out"></i><span>ICT Help Desk</span>
                             </a>
                         </li>
                         <li class="active">
@@ -593,6 +619,14 @@
                 'autoWidth': false
             })
             $('#example8').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+            $('#example9').DataTable({
                 'paging': true,
                 'lengthChange': false,
                 'searching': false,

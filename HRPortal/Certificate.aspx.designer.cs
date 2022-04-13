@@ -13,12 +13,30 @@ namespace HRPortal {
     public partial class Certificate {
         
         /// <summary>
-        /// feedback control.
+        /// renewLicense control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl feedback;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl renewLicense;
+        
+        /// <summary>
+        /// licenseNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox licenseNo;
+        
+        /// <summary>
+        /// renewlicensebutton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button renewlicensebutton;
     }
 }
