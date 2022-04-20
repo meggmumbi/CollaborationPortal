@@ -253,6 +253,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="tapplicationNo" type="string" />
             <element minOccurs="1" maxOccurs="1" name="documentCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentLink" type="string" />
           </sequence>
         </complexType>
       </element>
@@ -1298,7 +1299,7 @@
   </binding>
   <service name="CollaborationPortal">
     <port name="CollaborationPortal_Port" binding="tns:CollaborationPortal_Binding">
-      <address location="http://41.89.47.16:9082/CUE/WS/CUEL/Codeunit/CollaborationPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <address location="http://41.89.47.15:7047/CUELIVE/WS/CUEL/Codeunit/CollaborationPortal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
     </port>
   </service>
 </definitions>

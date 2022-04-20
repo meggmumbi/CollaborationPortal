@@ -26,7 +26,7 @@ namespace HRPortal
                     telephonenumber.Text = p.Telephone_No;
                     whatsappnumber.Text = p.Whatsapp_No;
                     idno.Text = Convert.ToString(p.ID_No);
-                    passport.Text = p.Passport_No;
+                    passport.Text = p.ID_No_Passport_No;
                     postcode.Text = p.Post_Code;
                     city.Text = p.City;
                     country.Text = p.Country;

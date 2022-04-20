@@ -1000,7 +1000,7 @@ namespace HRPortal
                                     {
 
                                         Config.navExtender.AddLinkToRecord("Collaboration Card", ApplicationNo, filename, "");
-                                        var status = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, tDocCode);
+                                        var status = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, tDocCode, filename);
                                         String[] info = status.Split('*');
                                         if (info[0] == "success")
                                         {
@@ -1319,6 +1319,7 @@ namespace HRPortal
             {
 
                 int mLineNo = Convert.ToInt32(docEntry.Text.Trim());
+                string tFileName = docfileName.Text.Trim();
                 String ApplicationNo = Request.QueryString["ApplicationNo"];
                 int mNo = 0;
                 Boolean error = false;
@@ -1338,10 +1339,29 @@ namespace HRPortal
                 }
                 else
                 {
-                    String status = Config.ObjNav.Removedoc(mLineNo, ApplicationNo);
-                    String[] info = status.Split('*');
-                    documentsfeedback.InnerHtml = "<div class='alert alert-" + info[0] + "'>" + info[1] + " <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a></div>";
-
+                    String filesFolder = ConfigurationManager.AppSettings["FilesLocation"] + "License Application/";                   
+                    ApplicationNo = ApplicationNo.Replace('/', '_');
+                    ApplicationNo = ApplicationNo.Replace(':', '_');
+                    String documentDirectory = filesFolder + ApplicationNo + "/";
+                    String myFile = documentDirectory + tFileName;
+                    if (File.Exists(myFile))
+                    {
+                        File.Delete(myFile);
+                        if (File.Exists(myFile))
+                        {
+                            documentsfeedback.InnerHtml = "<div class='alert alert-danger'>The file could not be deleted <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a></div>";
+                        }
+                        else
+                        {
+                            String status = Config.ObjNav.Removedoc(mLineNo, ApplicationNo);
+                            String[] info = status.Split('*');
+                            documentsfeedback.InnerHtml = "<div class='alert alert-" + info[0] + "'>" + info[1] + " <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a></div>";
+                        }
+                    }
+                    else
+                    {
+                        documentsfeedback.InnerHtml = "<div class='alert alert-danger'>A file with the given name does not exist in the server <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a></div>";
+                    }
                 }
 
             }
@@ -1614,7 +1634,7 @@ namespace HRPortal
                                                     if (File.Exists(filename))
                                                     {
                                                         Config.navExtender.AddLinkToRecord("Collaboration Card", ApplicationNo, filename, "");
-                                                        var status1 = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, ApplicationNo);
+                                                        var status1 = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, ApplicationNo, filename);
                                                         String[] info1 = status.Split('*');
                                                         if (info1[0] == "success")
                                                         {

@@ -111,7 +111,7 @@
           
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-table"></i>
+                                <i class="fa fa-table,"></i>
                                 <span>Collaborations Applications</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>

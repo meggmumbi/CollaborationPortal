@@ -1050,7 +1050,7 @@ namespace HRPortal
                                     {
 
                                         Config.navExtender.AddLinkToRecord("Collaboration Card", ApplicationNo, filename, "");
-                                        var status = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, tDocCode);
+                                        var status = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, tDocCode, filename);
                                         String[] info = status.Split('*');
                                         if (info[0] == "success")
                                         {
@@ -1628,7 +1628,7 @@ namespace HRPortal
                                                 if (File.Exists(filename))
                                                 {
                                                     Config.navExtender.AddLinkToRecord("Collaboration Card", ApplicationNo, filename, "");
-                                                    var status1 = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, ApplicationNo);
+                                                    var status1 = Config.ObjNav.FnAddDocumentsLinks(ApplicationNo, ApplicationNo, filename);
                                                     String[] info1 = status.Split('*');
                                                     if (info1[0] == "success")
                                                     {

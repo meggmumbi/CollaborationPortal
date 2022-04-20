@@ -682,7 +682,7 @@
                     <%
                         var nav = new Config().ReturnNav();
                         string docNo = Request.QueryString["ApplicationNo"];
-                        var data = nav.CollaborationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Facilities").ToList();
+                        var data = nav.CollabrorationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Facilities").ToList();
                         int counter = 0;
                         foreach (var item in data)
                         {
@@ -988,7 +988,7 @@
                     <%
                          var nav = new Config().ReturnNav();
                         string docNo = Request.QueryString["ApplicationNo"];
-                        var data = nav.CollaborationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Equipment and Teaching materials").ToList();
+                        var data = nav.CollabrorationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Equipment and Teaching materials").ToList();
                         int counter = 0;
                         foreach (var item in data)
                         {
@@ -996,10 +996,10 @@
                     %>
                     <tr>
                         <td><%=counter %></td>
-                        <td><% =item.Name%></td>
-                        <td><%=item.Type %></td>
-                        <td><% =item.Number %></td>       
-                          <td><% =item.Capacity %></td>   
+                         <td><% =item.Name%></td>
+                         <td><%=item.Type %></td>
+                         <td><% =item.Number %></td>       
+                         <td><% =item.Capacity %></td>   
                          <td><% =item.Shared %></td>  
                          <td><% =item.Specific_to_Department %></td>    
                                 
@@ -1118,7 +1118,7 @@
                     <%
                         var nav = new Config().ReturnNav();
                         string docNo = Request.QueryString["ApplicationNo"];
-                        var data = nav.CollaborationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Core-texts and journals").ToList();
+                        var data = nav.CollabrorationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Core-texts and journals").ToList();
                         int counter = 0;
                         foreach (var item in data)
                         {
@@ -1298,7 +1298,7 @@
                     <%
                         var nav = new Config().ReturnNav();
                         string docNo = Request.QueryString["ApplicationNo"];
-                        var data = nav.CollaborationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Academic Staff").ToList();
+                        var data = nav.CollabrorationResources.Where(x => x.Application_No == docNo && x.Resource_Type=="Academic Staff").ToList();
                         int counter = 0;
                         foreach (var item in data)
                         {
@@ -1471,6 +1471,7 @@
                             <th>#</th>
                             <th>Code</th>
                             <th>Description</th>
+                            <th>File Name</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -1490,11 +1491,11 @@
                             <td><%=counter3 %></td>
                             <td><% =item.Code%></td>
                             <td><% =item.Description %></td>
-
+                             <td><% =item.DocumentTitle %></td>
 
 
                             <td>
-                                <label class="btn btn-danger" onclick="removeDoc('<%=item.Entry_No %>','<%=item.Code %>');"><i class="fa fa-trash-o"></i>Remove</label></td>
+                                <label class="btn btn-danger" onclick="removeDoc('<%=item.Entry_No %>','<%=item.Code %>','<%=item.DocumentTitle%>');"><i class="fa fa-trash-o"></i>Remove</label></td>
                             <%
                                 }
                             %>
@@ -1909,9 +1910,10 @@
         </script>
 
        <script>
-           function removeDoc(entryNo, No) {
+           function removeDoc(entryNo, No,docFilename) {
                document.getElementById("documentDel").innerText = No;
                document.getElementById("ContentPlaceHolder1_docEntry").value = entryNo;
+               document.getElementById("ContentPlaceHolder1_docfileName").value = docFilename;
                 $("#removeDocumentModal").modal();
             }
         </script>
@@ -2007,6 +2009,7 @@
                 <div class="modal-body">
                     <p>Are you sure you want to delete the file <strong id="documentDel"></strong>?</p>
                     <asp:TextBox runat="server" ID="docEntry" type="hidden" />
+                     <asp:TextBox runat="server" ID="docfileName" type="hidden" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
